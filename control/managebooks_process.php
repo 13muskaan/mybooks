@@ -5,7 +5,7 @@ include( '../model/dbconnection.php' );
 
 try {
 
-    $insertsql = "INSERT INTO MyGuests (firstname, lastname, email)
+    $insertsql = "INSERT INTO books (firstname, lastname, email)
     VALUES ('John', 'Doe', 'john@example.com')";
     // use exec() because no results are returned
     $conn->exec($insertsql);
