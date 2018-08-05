@@ -1,37 +1,43 @@
-<?php 
+<?php
+include '../model/dbconnection.php';
+//include '../session.php';
 
 session_start();
-include ('../model/dbconnection.php'); 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	$email = !empty($_POST['email']) ? test_user_input(($_POST['email'])) : null;
-	$password = !empty($_POST['password']) ? test_user_input(($_POST['password'])) : null;
-	try {
-			$stmt = $conn->prepare("SELECT password FROM users WHERE email = :user");
-			$stmt->bindParam(':user', $email);
-			$stmt->execute();
-			$rows = $stmt ->fetch(PDO::FETCH_ASSOC)['password'];
-				if (password_verify($password, $rows)) {
-					$stmt = $conn->prepare("SELECT usersID, role FROM users WHERE email = :user");
-					$stmt->bindParam(':user', $email);
-					$stmt->execute();
-								$user = $stmt->fetch(PDO::FETCH_ASSOC);	
-									if ($user['role'] == '3') {
-									$_SESSION['Login'] = $user['role'];
-									header('location:sessions.php?role=' . $user['role']);
-									header('location: /view/pages/viewbooks.php');
-								}
-									if ($user['role'] == '2') {
-									$_SESSION['Login'] = $user['role'];
-									header('location:sessions.php?role=' . $user['role']);
-									header('location: /view/pages/viewbooks.php');
+$email = $_POST[ 'email' ];
+$password = $_POST[ 'pass' ];
+$message = "";
 
-								}
-									
-							}
-		else{
-			header('location:../view/pages/login.php');
+//When registering, store password in SQL Statement as $hash instead of $password:
+$hash = password_hash($password, PASSWORD_DEFAULT);
+
+if ( empty( $email ) || empty( $password ) ) {
+	$message = "username and password can't be empty";
+} else {
+	$login_sql = "SELECT * FROM users WHERE email = :email";
+
+	$stmt = $conn->prepare( $login_sql );
+	
+	//bindparam
+	$stmt->bindParam( ':email', $email, PDO::PARAM_STR );
+	
+	
+	$stmt->execute();
+	//$result = $stmt->fetchAll();
+	
+	if ( $stmt->rowcount() == 0 ) {
+		$_SESSION[ 'error' ] = "Email doesn't exist";
+		header( 'Location: ../view/pages/login.php' );
+	} else {
+		$result = $stmt->fetch();
+		if (password_verify($password, $result['password'])) {
+			$_SESSION[ 'userid' ] = $result[ 'ID' ];			
+			$_SESSION['usertype'] = $result['usertype']; 
+			$_SESSION[ 'message' ] = "Login successful";
+			header( 'Location: ../view/pages/viewbooks.php' );
+		} else {
+			$_SESSION[ 'error' ] = "Password Mismatch";
+			header( 'Location: ../view/pages/login.php' );
 		}
-	} catch (Exception $e) {
 		
 	}
 }

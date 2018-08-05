@@ -44,7 +44,7 @@
 		</div>
 	</div>
 <div class="container1" align="center"; width="20%;">  
-        <form role="form" width="50%;">
+        <form role="form" width="50%;" action="../../control/managebooks_process.php" method="post">
         <br style="clear:both">
                     <h3 style="margin-bottom: 25px; text-align: center;">Add book details.</h3>
     				<div class="form-group">
@@ -69,7 +69,7 @@
 						<input type="text" class="form-control" id="bookRanking" name="bookranking" placeholder="Book Ranking" required>
 					</div>
 			<div class="form-group">
-			<div class="text-center">
+			<!--<div class="text-center">
 					<img src="<?php echo $image ?>" class="avatar img-thumbnail" alt="avatar">
 					<h6>Upload a photo...</h6>
 					<form id="imageInput" change="displayImageError()" action="../../control/upload_file.php" method="POST" enctype="multipart/form-data">
@@ -78,7 +78,7 @@
 						<button type="submit" class="btn btn-primary" id="imageSubmitButton">Submit Image</button>
 					</form>
 					<div id="imageAlert" class="alert alert-danger" style="display: none;"></div>
-				</div>
+				</div>-->
 			
         <button type="button" id="submit" name="submit" class="btn btn-primary">Submit Form</button>
         </form>

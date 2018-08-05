@@ -5,9 +5,10 @@ include( '../model/dbconnection.php' );
 
 try {
 
-    $insertsql = "INSERT INTO books (firstname, lastname, email)
-    VALUES ('John', 'Doe', 'john@example.com')";
-    // use exec() because no results are returned
+    //$insertsql = "INSERT INTO books (firstname, lastname, email)
+    //VALUES ('John', 'Doe', 'john@example.com')";
+	$insertsql = "INSERT INTO books (booktitle, originaltitle, genre, yearofpublication, language, bookplot, bookranking) VALUES ('', '', '', '', '', '', '') ";
+	// use exec() because no results are returned
     $conn->exec($insertsql);
     echo "New record created successfully";
     }

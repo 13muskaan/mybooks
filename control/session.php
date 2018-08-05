@@ -4,17 +4,34 @@
 
 //include('../model/dbconnection.php');
 
+
+
 // create
 
+?>
+
+<?php
 // redirect
+?>
 
-// destroy
 
+<?php 
+
+//destroy
+session_start();
+session_destroy();
+header("location: login.php");
+
+?>
+
+<?php
+
+// error messages
 if (isset($_SESSION['Login']) == true) {
  if ($_GET['role'] == '1') {
  	client_portal();
  } else if ($_GET['role'] == '2'){ 		
-    Admin_portal();   mlmlm
+    Admin_portal();   
  }
  } else {
 	session_destroy();

@@ -41,8 +41,8 @@
 						<p class="form-title">
 							Sign In</p>
 						<p style="color: aliceblue; text-align: center;"> Please sign in to have access.</p>
-						<input type="text" placeholder="Email"/>
-						<input type="password" placeholder="Password"/>
+						<input type="text" placeholder="Email" name="email"/>
+						<input type="password" placeholder="Password" name="pass"/>
 						<input type="submit" value="Sign In" class="btn btn-success btn-sm"/>
 						<div class="remember-forgot">
 							<div class="row">
