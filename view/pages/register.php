@@ -27,10 +27,10 @@
 						<p class="form-title">
 							Register</p>
 						<p style="color: aliceblue; text-align: center;"> Please fill in your information to create an account.</p>
-						<input type="text" placeholder="Email"/>
-						<input type="password" placeholder="Password"/>
-						<input type="text" placeholder="First Name"/>
-						<input type="text" placeholder="Last Name"/>
+						<input type="text" placeholder="Email" name="email"/>
+						<input type="password" placeholder="Password" name="pass"/>
+						<input type="text" placeholder="First Name" name="firstname"/>
+						<input type="text" placeholder="Last Name" name="lastname"/>
 						<input type="submit" value="Register" class="btn btn-success btn-sm"/>
 					</form>
 				</div>
