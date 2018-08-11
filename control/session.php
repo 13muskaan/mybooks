@@ -4,29 +4,12 @@
 
 //include('../model/dbconnection.php');
 
-
-
-// create
-
-?>
-
-<?php
-// redirect
-?>
-
-
-<?php 
-
 //destroy
-session_start();
-session_destroy();
-header("location: login.php");
+//session_start();
+//session_destroy();
+//header("location: login.php");
 
-?>
-
-<?php
-
-// error messages
+/*// error messages
 if (isset($_SESSION['Login']) == true) {
  if ($_GET['role'] == '1') {
  	client_portal();
@@ -42,5 +25,5 @@ if (isset($_SESSION['Login']) == true) {
  }
  function Admin_portal(){
  	header('location:../view/html/admin.php');
- }
+ }*/
 ?>

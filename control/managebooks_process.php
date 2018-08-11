@@ -2,62 +2,100 @@
 include( '../model/dbconnection.php' );
 
 // INSERT BOOKS
+if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
+	try {
+		 $BookTitle = $_POST['booktitle'];
+		 $OrginalTitle = $_POST['booktitle'];
+		 $YearofPublication = $_POST['yearofpublication'];
+		 $Genre = $_POST['genre'];
+		 $AuthorID = $_POST['authorid'];
+		 $MillionsSold = $_POST['millionssold'];
+		 $LanguageWritten = $_POST['language'];
+		
+		$insertsql = "INSERT INTO book (BookTitle, OriginalTitle, YearofPublication, Genre, AuthorID, MillionsSold, LanguageWritten) VALUES (:BookTitle, :OriginalTitle, :YearofPublication, :Genre, :AuthorID, :MillionsSold, :LanguageWritten)";
 
-try {
 
-    //$insertsql = "INSERT INTO books (firstname, lastname, email)
-    //VALUES ('John', 'Doe', 'john@example.com')";
-	$insertsql = "INSERT INTO books (booktitle, originaltitle, genre, yearofpublication, language, bookplot, bookranking) VALUES ('', '', '', '', '', '', '') ";
-	// use exec() because no results are returned
-    $conn->exec($insertsql);
-    echo "New record created successfully";
-    }
-catch(PDOException $e)
-    {
-    echo $insertsql . "<br>" . $e->getMessage();
-    }
+		$stmt = $conn->prepare( $insertsql );
 
-$conn = null;
+		//bindparam
+		$stmt->bindParam( ':BookTitle', $BookTitle, PDO::PARAM_STR );
+		$stmt->bindParam( ':OriginalTitle', $OriginalTitle, PDO::PARAM_STR );
+		$stmt->bindParam( ':YearofPublication', $YearofPublication, PDO::PARAM_INT );
+		$stmt->bindParam( ':Genre', $Genre, PDO::PARAM_STR );
+		$stmt->bindParam( ':AuthorID', $AuthorID, PDO::PARAM_INT );
+		$stmt->bindParam( ':MillionsSold', $MillionsSold, PDO::PARAM_INT );
+		$stmt->bindParam( ':LanguageWritten', $LanguageWritten, PDO::PARAM_STR );
 
-header( 'location:../view/pages/addbooks.php' );
 
+		$stmt->execute();
+		
+		//echo "New record created successfully";
+	} catch ( PDOException $e ) {
+		echo $insertsql . "<br>" . $e->getMessage();
+	}
+
+	$conn = null;
+
+	header( 'location:../view/pages/addbooks.php' );
+}
 
 // UPDATE BOOKS
+if ( isset( $_POST[ "newbooktitle" ] ) && isset( $_GET[ 'UpdateID' ] ) ) {
+	try {
+		
+		$bookID = $_GET['UpdateID'];
+		$BookTitle = $_POST['newbooktitle'];
+		 $YearofPublication = $_POST['yearofpublication'];
+		 $Genre = $_POST['genre'];
+		 $AuthorID = $_POST['authorid'];
+		 $MillionsSold = $_POST['millionssold'];
+		 $LanguageWritten = $_POST['language'];
+		
+		$updatesql = "UPDATE book SET BookTitle=:BookTitle, YearofPublication=:YearofPublication, Genre=:Genre, AuthorID=:AuthorID, MillionsSold=:MillionsSold, LanguageWritten=:LanguageWritten WHERE BookID=:id";
 
-try {
+		// Prepare statement
+		$stmt = $conn->prepare( $updatesql );
+		
+		//bindparam
+		$stmt->bindParam( ':id', $UpdateID, PDO::PARAM_INT);
+		$stmt->bindParam( ':BookTitle', $BookTitle, PDO::PARAM_STR );
+		$stmt->bindParam( ':YearofPublication', $YearofPublication, PDO::PARAM_INT );
+		$stmt->bindParam( ':Genre', $Genre, PDO::PARAM_STR );
+		$stmt->bindParam( ':AuthorID', $AuthorID, PDO::PARAM_INT );
+		$stmt->bindParam( ':MillionsSold', $MillionsSold, PDO::PARAM_INT );
+		$stmt->bindParam( ':LanguageWritten', $LanguageWritten, PDO::PARAM_STR );
 
-	$updatesql = "UPDATE book SET lastname='Doe' WHERE id=2";
+		// execute the query
+		$stmt->execute();
+		
+		echo $stmt->rowCount();
+	} catch ( PDOException $e ) {
+		echo $updatesql . "<br>" . $e->getMessage();
+	}
 
-	// Prepare statement
-	$stmt = $conn->prepare( $updatesql );
+	$conn = null;
 
-	// execute the query
-	$stmt->execute();
-
-	// echo a message to say the UPDATE succeeded
-	echo $stmt->rowCount() . " records UPDATED successfully";
-} catch ( PDOException $e ) {
-	echo $updatesql . "<br>" . $e->getMessage();
+	header( 'location:../view/pages/viewbooks.php' );
 }
-
-$conn = null;
-
-header( 'location:../view/pages/updatebooks.php' );
 
 // DELETE BOOKS
+if ( isset( $_GET[ 'DeleteID' ] )) {
+	try {
+		// sql to delete a record
+		$deletesql = "DELETE FROM book WHERE BookID=:id";
+		
+		$stmt = $conn->prepare($deletesql);
 
-try {
-	// sql to delete a record
-	$sql = "DELETE FROM book WHERE BookID=:";
+		$stmt->bindParam( ':id', $_GET['DeleteID'], PDO::PARAM_INT);
+		
+		// use exec() because no results are returned
+		$stmt->execute();
+	} catch ( PDOException $e ) {
+		echo $deletesql . "<br>" . $e->getMessage();
+	}
+	
+	$conn = null;
 
-	// use exec() because no results are returned
-	$conn->exec( $deletesql );
-	echo "Record deleted successfully";
-} catch ( PDOException $e ) {
-	echo $deletesql . "<br>" . $e->getMessage();
+	header( 'location:../view/pages/viewbooks.php' );
 }
-
-$conn = null;
-
-header( 'location:../view/pages/deletebooks.php' );
 ?>

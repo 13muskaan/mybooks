@@ -27,10 +27,20 @@
 						<p class="form-title">
 							Register</p>
 						<p style="color: aliceblue; text-align: center;"> Please fill in your information to create an account.</p>
-						<input type="text" placeholder="Email" name="email"/>
-						<input type="password" placeholder="Password" name="pass"/>
-						<input type="text" placeholder="First Name" name="firstname"/>
-						<input type="text" placeholder="Last Name" name="lastname"/>
+						<input type="text" placeholder="Email" name="email" min="2" max="5" required/>
+						<input type="password" placeholder="Password" name="pass" required/>
+						<input type="text" placeholder="First Name" name="firstname" required/>
+						<input type="text" placeholder="Last Name" name="lastname" required/>
+						
+						<?php
+				if ( isset( $_SESSION[ 'error' ] ) ) {
+					if ( $_SESSION[ 'error' ] != "" ) {
+						echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
+						$_SESSION[ 'error' ] = "";
+					}
+				}
+				?>
+						
 						<input type="submit" value="Register" class="btn btn-success btn-sm"/>
 					</form>
 				</div>

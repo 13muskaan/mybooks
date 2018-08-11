@@ -24,9 +24,7 @@
 			<div class="col-md-12">
 				<div class="pr-wrap">
 					<div class="pass-reset">
-						<label>
-                        Enter the email you signed up with</label>
-					
+						<label> Enter the email you signed up with</label>
 
 						<input type="email" placeholder="Email"/>
 						<input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm"/>
@@ -42,8 +40,15 @@
 							<p class="form-title">
 								Sign In</p>
 							<p style="color: aliceblue; text-align: center;"> Please sign in to have access.</p>
-							<input type="text" placeholder="Email" name="email"/>
-							<input type="password" placeholder="Password" name="pass"/>
+							<!-- error messages-->
+							<div class="errorMsg">
+								<?php echo $message; ?>
+							</div>
+							<div class="successMsg">
+								<?php echo $message; ?>
+							</div>
+							<input type="text" placeholder="Email" name="email" style="text-align: center" required/>
+							<input type="password" placeholder="Password" name="pass" style="text-align: center" required/>
 							<input type="submit" value="Sign In" class="btn btn-success btn-sm"/>
 						</form>
 					</div>
@@ -52,6 +57,5 @@
 			<div class="posted-by"><a href="register.php">Register an account</a>
 			</div>
 		</div>
-
 </body>
 </html>

@@ -51,7 +51,12 @@
 						<input type="text" class="form-control" id="bookTitle" name="booktitle" placeholder="Book Title" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="originalTitle" name="originaltitle" placeholder="Original Title" required>
+					<div class="form-group">
+						<input type="text" class="form-control" id="language" name="language" placeholder="Language" required>
+						</div>			<input type="text" class="form-control" id="originalTitle" name="originaltitle" placeholder="Original Title" required>
+					</div>
+								<div class="form-group">
+						<input type="text" class="form-control" id="authorid" name="authorid" placeholder="AuthorID" required>
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" id="genre" name="genre" placeholder="Genre" required>
@@ -63,24 +68,21 @@
 						<input type="text" class="form-control" id="language" name="language" placeholder="Language" required>
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" id="bookPlot" name="bookplot" placeholder="Book Plot" required>
+						<input type="text" class="form-control" id="millionsold" name="millionssold" placeholder="Millions Sold" required>
 					</div>
-					<div class="form-group">
-						<input type="text" class="form-control" id="bookRanking" name="bookranking" placeholder="Book Ranking" required>
-					</div>
-			<div class="form-group">
-			<!--<div class="text-center">
+			<!--<div class="form-group">
+			<div class="text-center">
 					<img src="<?php echo $image ?>" class="avatar img-thumbnail" alt="avatar">
 					<h6>Upload a photo...</h6>
 					<form id="imageInput" change="displayImageError()" action="../../control/upload_file.php" method="POST" enctype="multipart/form-data">
 						<input type="file" name="image" id="fileToUpload" size="50" class="text-center center-block well well-sm">
 
 						<button type="submit" class="btn btn-primary" id="imageSubmitButton">Submit Image</button>
-					</form>
+		<div class="form-group					</form>
 					<div id="imageAlert" class="alert alert-danger" style="display: none;"></div>
 				</div>-->
-			
-        <button type="button" id="submit" name="submit" class="btn btn-primary">Submit Form</button>
+			<div class="form-group">
+        <input type="submit" id="submit" name="submit" class="btn btn-primary">
         </form>
     </div>
 </div>

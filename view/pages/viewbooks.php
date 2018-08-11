@@ -52,19 +52,19 @@
 		  echo '<div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>';
 		  echo '<div class="panel-footer">', '<p>', 'Millions Sold: ', $row['MillionsSold'], '</p>','</div>';
 			  
-			echo '<a href="#" class="btn btn-primary a-btn-slide-text">
+			echo '<a href="../../control/managebooks_process.php?DeleteID='. $row['BookID'] .'" class="btn btn-primary a-btn-slide-text">
        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         <span><strong>Delete</strong></span>            
     </a>
 				
-					<a href="updatebooks.php?name=" class="btn btn-primary a-btn-slide-text">
+					<a href="updatebooks.php?UpdateID='. $row['BookID'] .'" class="btn btn-primary a-btn-slide-text">
        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
         <span><strong>Edit</strong></span>            
     </a>';
 		
 			echo '</div>
 			</div>';
-			  
+			 
 			  $count++;
 		  }
 		
@@ -72,7 +72,6 @@
 	</div>
 	</div>
 	<br><br>
-
 	<footer class="container-fluid text-center">
 		<?php include('footer.php');?>
 	</footer>
