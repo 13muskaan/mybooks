@@ -49,7 +49,7 @@ if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 
 	$conn = null;
 
-	//header( 'location:../view/pages/addbooks.php' );
+	header( 'location:../view/pages/addbooks.php' );
 }
 
 // UPDATE BOOKS
