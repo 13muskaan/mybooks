@@ -27,7 +27,7 @@ if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 		$stmt->bindParam( ':LanguageWritten', $LanguageWritten, PDO::PARAM_STR );
 
 
-		$stmt->execute();
+		$stmt->execute() ;
 
 		//echo "New record created successfully";
 	} catch ( PDOException $e ) {
@@ -43,7 +43,7 @@ if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 if ( isset( $_POST[ "newbooktitle" ] ) && isset( $_GET[ 'UpdateID' ] ) ) {
 	try {
 
-		$bookID = $_GET[ 'UpdateID' ];
+		$UpdateID = $_GET[ 'UpdateID' ];
 		$BookTitle = $_POST[ 'newbooktitle' ];
 		$YearofPublication = $_POST[ 'yearofpublication' ];
 		$Genre = $_POST[ 'genre' ];
@@ -51,7 +51,7 @@ if ( isset( $_POST[ "newbooktitle" ] ) && isset( $_GET[ 'UpdateID' ] ) ) {
 		$MillionsSold = $_POST[ 'millionssold' ];
 		$LanguageWritten = $_POST[ 'language' ];
 
-		$updatesql = "UPDATE book SET BookTitle=:BookTitle, YearofPublication=:YearofPublication, Genre=:Genre, AuthorID=:AuthorID, MillionsSold=:MillionsSold, LanguageWritten=:LanguageWritten WHERE BookID=:id";
+		$updatesql = "UPDATE book SET BookTitle= :BookTitle, YearofPublication= :YearofPublication, Genre= :Genre, AuthorID= :AuthorID, MillionsSold= :MillionsSold, LanguageWritten= :LanguageWritten WHERE BookID= :id";
 
 		// Prepare statement
 		$stmt = $conn->prepare( $updatesql );
@@ -67,8 +67,7 @@ if ( isset( $_POST[ "newbooktitle" ] ) && isset( $_GET[ 'UpdateID' ] ) ) {
 
 		// execute the query
 		$stmt->execute();
-
-		echo $stmt->rowCount();
+		
 	} catch ( PDOException $e ) {
 		echo $updatesql . "<br>" . $e->getMessage();
 	}

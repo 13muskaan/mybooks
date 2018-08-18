@@ -1,8 +1,8 @@
 <?php
 $servername = "localhost";
 $username = "root";
-//$password = "root"; // Use this for Mac (MAMP)
-$password=""; // Use this for Windows (XAMPP)
+$password = "root"; // Use this for Mac (MAMP)
+//$password=""; // Use this for Windows (XAMPP)
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=mybooks", $username, $password);

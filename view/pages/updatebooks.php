@@ -1,12 +1,13 @@
-<?php include('navigationbar.php');
+<?php
+include( 'navigationbar.php' );
 
-include('../../model/dbconnection.php');
+include( '../../model/dbconnection.php' );
 
 $selectsql = "SELECT * FROM book WHERE BookID = :id";
 
-$stmt = $conn->prepare($selectsql);
+$stmt = $conn->prepare( $selectsql );
 
-$stmt->bindParam(':id', $_GET['UpdateID'], PDO::PARAM_INT);
+$stmt->bindParam( ':id', $_GET[ 'UpdateID' ], PDO::PARAM_INT );
 
 $stmt->execute();
 
@@ -42,34 +43,38 @@ $row = $stmt->fetch();
         <span><strong>Go Back</strong></span>            
     </a>
 
+
 	<div class="container1" align="center" ; width="20%;">
-		<form role="form" width="50%;" method="post" action="../../control/managebooks_process.php?UpdateID=<?php echo $row['BookID']; ?>">
+		<!--<form role="form" width="50%;" method="post" action="../../control/managebooks_process.php?UpdateID=<?php //echo $row['BookID']; ?>">-->
+
+
+		<form role="form" width="50%" method="post" action="../../control/managebooks_process.php?UpdateID=<?php echo $_GET['UpdateID']; ?>">
 			<br style="clear:both">
 			<h3 style="margin-bottom: 25px; text-align: center;">Update book details.</h3>
 			<div class="form-group">
-				<input type="text" class="form-control" id="bookTitle" name="newbooktitle" placeholder="Book Title" value= "<?php echo $row['BookTitle']; ?>" required>
+				<input type="text" class="form-control" id="bookTitle" name="newbooktitle" placeholder="Book Title" value="<?php echo $row['BookTitle']; ?>" required>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="authorid" name="authorid" placeholder="AuthorID" value= "<?php echo $row['AuthorID']; ?>" required>
+				<input type="text" class="form-control" id="authorid" name="authorid" placeholder="AuthorID" value="<?php echo $row['AuthorID']; ?>" required>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="genre" name="genre" placeholder="Genre" value= "<?php echo $row['Genre']; ?>" required>
+				<input type="text" class="form-control" id="genre" name="genre" placeholder="Genre" value="<?php echo $row['Genre']; ?>" required>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="yearOfpublication" name="yearofpublication" placeholder="Year Of Publication" value= "<?php echo $row['YearofPublication']; ?>"  required>
+				<input type="text" class="form-control" id="yearOfpublication" name="yearofpublication" placeholder="Year Of Publication" value="<?php echo $row['YearofPublication']; ?>" required>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="language" name="language" placeholder="Language" value= "<?php echo $row['LanguageWritten']; ?>" required>
+				<input type="text" class="form-control" id="language" name="language" placeholder="Language" value="<?php echo $row['LanguageWritten']; ?>" required>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="millionsold" name="millionssold" placeholder="Millions Sold" value= "<?php echo $row['MillionsSold']; ?>" required>
+				<input type="text" class="form-control" id="millionsold" name="millionssold" placeholder="Millions Sold" value="<?php echo $row['MillionsSold']; ?>" required>
 			</div>
 			<div class="form-group">
 
 				<input type="submit" id="submit" name="submit" class="btn btn-primary">
 			</div>
 		</form>
-		</div>
+	</div>
 	</div>
 	</div>
 	<footer class="container-fluid text-center">
