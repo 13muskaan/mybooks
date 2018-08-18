@@ -49,7 +49,7 @@
 		  echo'<div class="panel-heading">', '<p>', 'Year of Publication', '</p>', $row['YearofPublication'], '</div>';
 		  echo'<div class="panel-heading">', '<p>', 'Genre', '</p>', $row['Genre'], '</div>';
 		  echo'<div class="panel-heading">', '<p>', 'Language', '</p>', $row['LanguageWritten'], '</div>';
-		  echo '<div class="panel-body"><img src="https://placehold.it/150x80?text=IMAGE" class="img-responsive" style="width:100%" alt="Image"></div>';
+		  echo '<div class="panel-body"><img src="', "../" . $row['CoverImage'] ,'" class="img-responsive" style="width:100%" alt="Image"></div>';
 		  echo '<div class="panel-footer">', '<p>', 'Millions Sold: ', $row['MillionsSold'], '</p>','</div>';
 			  
 			echo '<a href="../../control/managebooks_process.php?DeleteID='. $row['BookID'] .'" class="btn btn-primary a-btn-slide-text">

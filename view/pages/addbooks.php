@@ -41,7 +41,7 @@
 		</div>
 	</div>
 	<div class="container1" align="center" ; width="20%;">
-		<form role="form" width="50%;" action="../../control/managebooks_process.php" method="post">
+		<form role="form" width="50%;" action="../../control/managebooks_process.php" method="post" enctype="multipart/form-data">
 			<br style="clear:both">
 			<h3 style="margin-bottom: 25px; text-align: center;">Add book details.</h3>
 			<div class="form-group">

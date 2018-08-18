@@ -1,5 +1,6 @@
 <?php
 include( '../model/dbconnection.php' );
+include( 'bookcover_upload.php' );
 
 // INSERT BOOKS
 if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
@@ -26,9 +27,21 @@ if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 		$stmt->bindParam( ':MillionsSold', $MillionsSold, PDO::PARAM_INT );
 		$stmt->bindParam( ':LanguageWritten', $LanguageWritten, PDO::PARAM_STR );
 
+		$stmt->execute();
+		
+		$id = $conn->lastInsertId();
 
-		$stmt->execute() ;
-
+		$imageURL = uploadCover( $_FILES[ "image" ], $id );
+		
+		$coverUpdateSQL = "UPDATE book SET CoverImage = :image WHERE BookID = :id";
+		
+		$stmt = $conn->prepare( $coverUpdateSQL);
+		
+		$stmt->bindParam( ':id', $id, PDO::PARAM_STR );
+		$stmt->bindParam( ':image', $imageURL, PDO::PARAM_STR );
+		
+		$stmt->execute();
+		
 		//echo "New record created successfully";
 	} catch ( PDOException $e ) {
 		echo $insertsql . "<br>" . $e->getMessage();
@@ -36,7 +49,7 @@ if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 
 	$conn = null;
 
-	header( 'location:../view/pages/addbooks.php' );
+	//header( 'location:../view/pages/addbooks.php' );
 }
 
 // UPDATE BOOKS
@@ -67,7 +80,7 @@ if ( isset( $_POST[ "newbooktitle" ] ) && isset( $_GET[ 'UpdateID' ] ) ) {
 
 		// execute the query
 		$stmt->execute();
-		
+
 	} catch ( PDOException $e ) {
 		echo $updatesql . "<br>" . $e->getMessage();
 	}
