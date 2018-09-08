@@ -1,4 +1,4 @@
-<? include('header.php');?>
+<? include('header.php');?> <!-- use transactions. -->
 <!doctype html>
 <html>
 <head>

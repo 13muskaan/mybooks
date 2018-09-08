@@ -48,7 +48,7 @@ $row = $stmt->fetch();
 		<!--<form role="form" width="50%;" method="post" action="../../control/managebooks_process.php?UpdateID=<?php //echo $row['BookID']; ?>">-->
 
 
-		<form role="form" width="50%" method="post" action="../../control/managebooks_process.php?UpdateID=<?php echo $_GET['UpdateID']; ?>">
+		<form role="form" width="50%" method="post" action="../../model/managebooks_process.php?UpdateID=<?php echo $_GET['UpdateID']; ?>">
 			<br style="clear:both">
 			<h3 style="margin-bottom: 25px; text-align: center;">Update book details.</h3>
 			<div class="form-group">

@@ -46,6 +46,7 @@ if ( empty( $email ) || empty( $password ) || empty( $firstname ) || empty( $las
 	if ( $_SESSION[ 'error' ] == "" ) {
 
 		$register_sql = "INSERT INTO users (email, password, firstname, lastname ) VALUES (:email, :password, :firstname, :lastname)";
+	// 2 sql statements for transactions. use last insert sql statement.
 
 		$stmt = $conn->prepare( $register_sql );
 

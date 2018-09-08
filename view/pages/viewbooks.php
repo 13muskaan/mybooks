@@ -52,7 +52,7 @@
 		  echo '<div class="panel-body"><img src="', "../" . $row['CoverImage'] ,'" class="img-responsive" style="width:100%" alt="Image"></div>';
 		  echo '<div class="panel-footer">', '<p>', 'Millions Sold: ', $row['MillionsSold'], '</p>','</div>';
 			  
-			echo '<a href="../../control/managebooks_process.php?DeleteID='. $row['BookID'] .'" class="btn btn-primary a-btn-slide-text">
+			echo '<a href="../../model/managebooks_process.php?DeleteID='. $row['BookID'] .'" class="btn btn-primary a-btn-slide-text">
        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
         <span><strong>Delete</strong></span>            
     </a>

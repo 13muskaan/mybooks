@@ -1,7 +1,7 @@
 <?php
 include( '../model/dbconnection.php' );
 include( 'bookcover_upload.php' );
-
+include('testInput.php');
 // INSERT BOOKS
 if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 	try {
