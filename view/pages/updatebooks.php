@@ -8,7 +8,7 @@ $selectsql = "SELECT * FROM book WHERE BookID = :id";
 $stmt = $conn->prepare( $selectsql );
 
 $stmt->bindParam( ':id', $_GET[ 'UpdateID' ], PDO::PARAM_INT );
-
+//
 $stmt->execute();
 
 $row = $stmt->fetch();
