@@ -1,4 +1,12 @@
-<?php include('navigationbar.php'); include('header.php');?>
+<?php 
+$whoCanAccess = [1,2];
+
+
+include('navigationbar.php'); include('header.php');
+
+//if PageProtector([1, 2]);
+
+?>
 <!doctype html>
 <head>
 	<style>
@@ -40,32 +48,44 @@
 			<p>Add New Books.</p>
 		</div>
 	</div>
+		<?php
+				if ( isset( $_SESSION[ 'error' ] ) ) {
+					if ( $_SESSION[ 'error' ] != "" ) {
+						echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
+						$_SESSION[ 'error' ] = "";
+					}
+				}
+				if ( isset( $_SESSION[ 'message' ] ) ) {
+					if ( $_SESSION[ 'message' ] != "" ) {
+						echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
+						$_SESSION[ 'message' ] = "";
+					}
+				}
+				?>
 	<div class="container1" align="center" ; width="20%;">
 		<form role="form" width="50%;" action="../../model/managebooks_process.php" method="post" enctype="multipart/form-data">
 			<br style="clear:both">
 			<h3 style="margin-bottom: 25px; text-align: center;">Add book details.</h3>
 			<div class="form-group">
-				<input type="text" class="form-control" id="bookTitle" name="booktitle" placeholder="Book Title" required>
+				<input type="text" class="form-control" id="bookTitle" name="booktitle" placeholder="Book Title*" required>
 			</div>
 			<div class="form-group">
-				<div class="form-group">
-					<input type="text" class="form-control" id="language" name="language" placeholder="Language" required>
-				</div> <input type="text" class="form-control" id="originalTitle" name="originaltitle" placeholder="Original Title" required>
+				<input type="text" class="form-control" id="originalTitle" name="originaltitle" placeholder="Original Title">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="authorid" name="authorid" placeholder="AuthorID" required>
+				<input type="text" class="form-control" id="authorid" name="authorid" placeholder="AuthorID*" required>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="genre" name="genre" placeholder="Genre" required>
+				<input type="text" class="form-control" id="genre" name="genre" placeholder="Genre">
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="yearOfpublication" name="yearofpublication" placeholder="Year Of Publication" required>
+				<input type="text" class="form-control" id="yearOfpublication" name="yearofpublication" placeholder="Year Of Publication*" required>
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="language" name="language" placeholder="Language" required>
+				<input type="text" class="form-control" id="language" name="language" placeholder="Language (if not English)" >
 			</div>
 			<div class="form-group">
-				<input type="text" class="form-control" id="millionsold" name="millionssold" placeholder="Millions Sold" required>
+				<input type="text" class="form-control" id="millionsold" name="millionssold" placeholder="Millions Sold">
 			</div>
 			<div class="form-group">
 				<div class="text-center">

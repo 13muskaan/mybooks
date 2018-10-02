@@ -1,4 +1,8 @@
-<? include('header.php');?> <!-- use transactions. -->
+<?
+$whoCanAccess = [1];
+
+include('header.php');
+?> <!-- use transactions. -->
 <!doctype html>
 <html>
 <head>
@@ -31,6 +35,10 @@
 						<input type="password" placeholder="Password" name="pass" required/>
 						<input type="text" placeholder="First Name" name="firstname" required/>
 						<input type="text" placeholder="Last Name" name="lastname" required/>
+						<select class="form-control" name="role">
+							<option value="2">Normal User</option>
+        					<option value="1">Admin</option>
+      					</select>
 						
 						<?php
 				if ( isset( $_SESSION[ 'error' ] ) ) {

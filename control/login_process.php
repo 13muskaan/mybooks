@@ -13,7 +13,7 @@ $hash = password_hash($password, PASSWORD_DEFAULT);
 if ( empty( $email ) || empty( $password ) ) {
 	$message = "username and password can't be empty";
 } else {
-	$login_sql = "SELECT * FROM users WHERE email = :email";
+	$login_sql = "SELECT * FROM login WHERE email = :email";
 
 	$stmt = $conn->prepare( $login_sql );
 	
@@ -31,7 +31,7 @@ if ( empty( $email ) || empty( $password ) ) {
 		$result = $stmt->fetch();
 		if (password_verify($password, $result['password'])) {
 			$_SESSION[ 'userid' ] = $result[ 'ID' ];			
-			$_SESSION['usertype'] = $result['usertype']; 
+			$_SESSION['role'] = $result['role']; 
 			$_SESSION[ 'message' ] = "Login successful";
 			header( 'Location: ../view/pages/viewbooks.php' );
 		} else {

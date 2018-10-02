@@ -1,17 +1,17 @@
 <?php
 include( '../model/dbconnection.php' );
 include( 'bookcover_upload.php' );
-include('testInput.php');
+include('../control/testInput.php');
 // INSERT BOOKS
 if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 	try {
-		$BookTitle = $_POST[ 'booktitle' ];
-		$OrginalTitle = $_POST[ 'booktitle' ];
-		$YearofPublication = $_POST[ 'yearofpublication' ];
-		$Genre = $_POST[ 'genre' ];
-		$AuthorID = $_POST[ 'authorid' ];
-		$MillionsSold = $_POST[ 'millionssold' ];
-		$LanguageWritten = $_POST[ 'language' ];
+		$BookTitle = SanitiseData($_POST['booktitle'], 'untitled');
+		$OriginalTitle = SanitiseData($_POST['originaltitle'], $BookTitle);
+		$YearofPublication = SanitiseData($_POST['yearofpublication']);
+		$Genre = SanitiseData($_POST[ 'genre' ], 'un-genre');
+		$AuthorID = SanitiseData($_POST[ 'authorid' ], '0');
+		$MillionsSold = SanitiseData($_POST[ 'millionssold' ], '0');
+		$LanguageWritten = SanitiseData($_POST[ 'language' ], 'English');
 
 		$insertsql = "INSERT INTO book (BookTitle, OriginalTitle, YearofPublication, Genre, AuthorID, MillionsSold, LanguageWritten) VALUES (:BookTitle, :OriginalTitle, :YearofPublication, :Genre, :AuthorID, :MillionsSold, :LanguageWritten)";
 
@@ -26,11 +26,13 @@ if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 		$stmt->bindParam( ':AuthorID', $AuthorID, PDO::PARAM_INT );
 		$stmt->bindParam( ':MillionsSold', $MillionsSold, PDO::PARAM_INT );
 		$stmt->bindParam( ':LanguageWritten', $LanguageWritten, PDO::PARAM_STR );
-
+		
 		$stmt->execute();
 		
 		$id = $conn->lastInsertId();
 
+		if (!empty($_FILES['image'])) {
+		
 		$imageURL = uploadCover( $_FILES[ "image" ], $id );
 		
 		$coverUpdateSQL = "UPDATE book SET CoverImage = :image WHERE BookID = :id";
@@ -41,6 +43,8 @@ if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 		$stmt->bindParam( ':image', $imageURL, PDO::PARAM_STR );
 		
 		$stmt->execute();
+			
+		}
 		
 		//echo "New record created successfully";
 	} catch ( PDOException $e ) {
@@ -55,16 +59,16 @@ if ( isset( $_POST[ "booktitle" ] ) && !isset( $_POST[ 'BookID' ] ) ) {
 // UPDATE BOOKS
 if ( isset( $_POST[ "newbooktitle" ] ) && isset( $_GET[ 'UpdateID' ] ) ) {
 	try {
+		
+		$UpdateID = SanitseData($_GET[ 'UpdateID' ]);
+		$BookTitle = SanitiseData($_POST[ 'newbooktitle' ], 'untitled');
+		$YearofPublication = SanitiseData($_POST['yearofpublication']);
+		$Genre = SanitiseData($_POST[ 'genre' ], 'un-genre');
+		$AuthorID = SanitiseData($_POST[ 'authorid' ], '0');
+		$MillionsSold = SanitiseData($_POST[ 'millionssold' ], '0');
+		$LanguageWritten = SanitiseData($_POST[ 'language' ], 'English');
 
-		$UpdateID = $_GET[ 'UpdateID' ];
-		$BookTitle = $_POST[ 'newbooktitle' ];
-		$YearofPublication = $_POST[ 'yearofpublication' ];
-		$Genre = $_POST[ 'genre' ];
-		$AuthorID = $_POST[ 'authorid' ];
-		$MillionsSold = $_POST[ 'millionssold' ];
-		$LanguageWritten = $_POST[ 'language' ];
-
-		$updatesql = "UPDATE book SET BookTitle= :BookTitle, YearofPublication= :YearofPublication, Genre= :Genre, AuthorID= :AuthorID, MillionsSold= :MillionsSold, LanguageWritten= :LanguageWritten WHERE BookID= :id";
+		$updatesql = "UPDATE book SET BookTitle= :BookTitle, YearofPublication= :YearofPublication, Genre= :Genre, AuthorID= :AuthorID, MillionsSold= :MillionsSold, LanguageWritten= :LanguageWritten WHERE BookID= :id;";
 
 		// Prepare statement
 		$stmt = $conn->prepare( $updatesql );
@@ -98,7 +102,7 @@ if ( isset( $_GET[ 'DeleteID' ] ) ) {
 
 		$stmt = $conn->prepare( $deletesql );
 
-		$stmt->bindParam( ':id', $_GET[ 'DeleteID' ], PDO::PARAM_INT );
+		$stmt->bindParam( ':id', SanatiseData($_GET[ 'DeleteID' ]), PDO::PARAM_INT );
 
 		// use exec() because no results are returned
 		$stmt->execute();
