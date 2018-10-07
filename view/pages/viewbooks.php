@@ -1,11 +1,10 @@
-<?php 
-$whoCanAccess = [1,2];
+<?php
+$whoCanAccess = [ 1, 2 ];
 
-include('header.php');
-include('navigationbar.php'); 
-include('../../model/dbconnection.php');
+include( 'header.php' );
+include( 'navigationbar.php' );
+include( '../../model/dbconnection.php' );
 ?>
-<!doctype html>
 <head>
 	<title> View Books</title>
 	<style>
@@ -29,21 +28,21 @@ include('../../model/dbconnection.php');
 			<p>View all books.</p>
 		</div>
 	</div>
-	
-		<?php
-				if ( isset( $_SESSION[ 'error' ] ) ) {
-					if ( $_SESSION[ 'error' ] != "" ) {
-						echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
-						$_SESSION[ 'error' ] = "";
-					}
-				}
-				if ( isset( $_SESSION[ 'message' ] ) ) {
-					if ( $_SESSION[ 'message' ] != "" ) {
-						echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
-						$_SESSION[ 'message' ] = "";
-					}
-				}
-				?>
+
+	<?php
+	if ( isset( $_SESSION[ 'error' ] ) ) {
+		if ( $_SESSION[ 'error' ] != "" ) {
+			echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
+			$_SESSION[ 'error' ] = "";
+		}
+	}
+	if ( isset( $_SESSION[ 'message' ] ) ) {
+		if ( $_SESSION[ 'message' ] != "" ) {
+			echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
+			$_SESSION[ 'message' ] = "";
+		}
+	}
+	?>
 	<div class="container">
 		<?php 
 		  

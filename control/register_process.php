@@ -3,15 +3,15 @@ include( '../model/dbconnection.php' );
 //include('session.php');
 session_start();
 
-if(!isset($_SESSION['role']) || $_SESSION['role'] == 1) {
-	header ('location:../view/pages/register.php');
+if ( !isset( $_SESSION[ 'role' ] ) || $_SESSION[ 'role' ] == 1 ) {
+	header( 'location:../view/pages/register.php' );
 }
 
 $email = $_POST[ 'email' ];
 $password = $_POST[ 'pass' ];
 $firstname = $_POST[ 'firstname' ];
 $lastname = $_POST[ 'lastname' ];
-$role = $_POST['role'];
+$role = $_POST[ 'role' ];
 
 $_SESSION[ 'error' ] = "";
 
@@ -24,7 +24,7 @@ if ( empty( $email ) || empty( $password ) || empty( $firstname ) || empty( $las
 
 	echo "<br>";
 	echo $email . " | " . $password . " | " . $firstname . " | " . $lastname;
-	
+
 	$firstname_check = preg_match( '~^[A-Za-z\-]{3,20}$~i', $firstname );
 	if ( !$firstname_check ) {
 		$_SESSION[ 'error' ] .= "\n<hr>First Name is not formatted correctly, Make sure there is:\n-at least three characters\n-No numbers\n-No symbols (except hyphen '-')";
@@ -43,25 +43,25 @@ if ( empty( $email ) || empty( $password ) || empty( $firstname ) || empty( $las
 	$emailSQL = "SELECT * FROM login WHERE email = :email";
 	$stmt = $conn->prepare( $emailSQL );
 	$stmt->bindParam( ':email', $email, PDO::PARAM_STR );
-	
+
 	try {
 		$stmt->execute();
-	} catch (PDOException $e) {
+	} catch ( PDOException $e ) {
 		echo $e;
 	}
 
-	
-	
+
+
 	if ( $stmt->rowcount() > 0 ) {
 		$_SESSION[ 'error' ] = "<hr>This email is already registered.";
 	}
 
-	echo "<hr>Session error: " . $_SESSION['error'] . "<hr>";
-	
+	echo "<hr>Session error: " . $_SESSION[ 'error' ] . "<hr>";
+
 	if ( $_SESSION[ 'error' ] == "" ) {
-		
-		
-		if ( newUser($conn, $email, $hash, $role, $firstname, $lastname) ) {
+
+
+		if ( newUser( $conn, $email, $hash, $role, $firstname, $lastname ) ) {
 			$_SESSION[ 'message' ] = 'user successfully created! Welcome ' . $_POST[ 'firstname' ] . "";
 			header( 'location:../view/pages/viewbooks.php' );
 		} else {

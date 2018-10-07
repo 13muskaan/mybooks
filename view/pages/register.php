@@ -1,10 +1,10 @@
 <?
-$whoCanAccess = [1];
+$whoCanAccess = [ 1 ];
 
-include('header.php');
+include( 'header.php' );
+include( 'navigationbar.php' )
 ?> <!-- use transactions. -->
-<!doctype html>
-<html>
+
 <head>
 	<!--<meta charset="UTF-8">-->
 	<title>Register</title>
@@ -37,25 +37,23 @@ include('header.php');
 						<input type="text" placeholder="Last Name" name="lastname" required/>
 						<select class="form-control" name="role">
 							<option value="2">Normal User</option>
-        					<option value="1">Admin</option>
-      					</select>
-						
+							<option value="1">Admin</option>
+						</select>
+
 						<?php
-				if ( isset( $_SESSION[ 'error' ] ) ) {
-					if ( $_SESSION[ 'error' ] != "" ) {
-						echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
-						$_SESSION[ 'error' ] = "";
-					}
-				}
-				?>
-						
+						if ( isset( $_SESSION[ 'error' ] ) ) {
+							if ( $_SESSION[ 'error' ] != "" ) {
+								echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
+								$_SESSION[ 'error' ] = "";
+							}
+						}
+						?>
+
 						<input type="submit" value="Register" class="btn btn-success btn-sm"/>
 					</form>
 				</div>
 			</div>
 		</div>
-		<div class="posted-by"><a href="login.php">Login</a>
-		</div>
-		</div>
+	</div>
 </body>
 </html>

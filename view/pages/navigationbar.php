@@ -1,4 +1,5 @@
 <!doctype html>
+<html>
 
 <body style="height:1500px">
 
@@ -21,4 +22,3 @@
 			</ul>
 		</div>
 	</nav>
-	

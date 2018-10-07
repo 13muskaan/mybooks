@@ -1,10 +1,10 @@
-<? $whoCanAccess = [0];
+<?
+$whoCanAccess = [ 0 ];
 
-include('header.php');?>
-<!doctype html>
-<html>
+include( 'header.php' );
+?>
+
 <head>
-	<!--<meta charset="UTF-8">-->
 	<title>Login</title>
 	<script>
 		$( document ).ready( function () {
@@ -44,27 +44,25 @@ include('header.php');?>
 							<p style="color: aliceblue; text-align: center;"> Please sign in to have access.</p>
 							<!-- error messages-->
 							<?php
-				if ( isset( $_SESSION[ 'error' ] ) ) {
-					if ( $_SESSION[ 'error' ] != "" ) {
-						echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
-						$_SESSION[ 'error' ] = "";
-					}
-				}
-				if ( isset( $_SESSION[ 'message' ] ) ) {
-					if ( $_SESSION[ 'message' ] != "" ) {
-						echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
-						$_SESSION[ 'message' ] = "";
-					}
-				}
-				?>
+							if ( isset( $_SESSION[ 'error' ] ) ) {
+								if ( $_SESSION[ 'error' ] != "" ) {
+									echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
+									$_SESSION[ 'error' ] = "";
+								}
+							}
+							if ( isset( $_SESSION[ 'message' ] ) ) {
+								if ( $_SESSION[ 'message' ] != "" ) {
+									echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
+									$_SESSION[ 'message' ] = "";
+								}
+							}
+							?>
 							<input type="text" placeholder="Email" name="email" style="text-align: center" required/>
 							<input type="password" placeholder="Password" name="pass" style="text-align: center" required/>
 							<input type="submit" value="Sign In" class="btn btn-success btn-sm"/>
 						</form>
 					</div>
 				</div>
-			</div>
-			<div class="posted-by"><a href="register.php">Register an account</a>
 			</div>
 		</div>
 </body>

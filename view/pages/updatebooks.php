@@ -1,6 +1,6 @@
 <?php
-$whoCanAccess = [1,2];
-include('header.php');
+$whoCanAccess = [ 1, 2 ];
+include( 'header.php' );
 include( 'navigationbar.php' );
 
 include( '../../model/dbconnection.php' );
@@ -16,7 +16,7 @@ $stmt->execute();
 $row = $stmt->fetch();
 
 ?>
-<!doctype html>
+
 <head>
 	<style>
 		/* Remove the navbar's default rounded borders and increase the bottom margin */
@@ -40,26 +40,27 @@ $row = $stmt->fetch();
 			<p>Update Books</p>
 		</div>
 	</div>
-	
-		<?php
-				if ( isset( $_SESSION[ 'error' ] ) ) {
-					if ( $_SESSION[ 'error' ] != "" ) {
-						echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
-						$_SESSION[ 'error' ] = "";
-					}
-				}
-				if ( isset( $_SESSION[ 'message' ] ) ) {
-					if ( $_SESSION[ 'message' ] != "" ) {
-						echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
-						$_SESSION[ 'message' ] = "";
-					}
-				}
-				?>
-	
+
+	<?php
+	if ( isset( $_SESSION[ 'error' ] ) ) {
+		if ( $_SESSION[ 'error' ] != "" ) {
+			echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
+			$_SESSION[ 'error' ] = "";
+		}
+	}
+	if ( isset( $_SESSION[ 'message' ] ) ) {
+		if ( $_SESSION[ 'message' ] != "" ) {
+			echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
+			$_SESSION[ 'message' ] = "";
+		}
+	}
+	?>
+
 	<a href="viewbooks.php" class="btn btn-primary a-btn-slide-text" style="align-items: center;">
        <span class="glyphicon glyphicon-back" aria-hidden="true"></span>
         <span><strong>Go Back</strong></span>            
     </a>
+
 
 
 	<div class="container1" align="center" ; width="20%;">
