@@ -57,6 +57,9 @@ include( '../../model/dbconnection.php' );
 		
 		
 		  foreach($staticresult as $row) {
+			  if ($row['AuthorID'] == 0) {
+				continue;  
+			  }
 			  
 			  if ($count % 3 == 2) {
 				  echo '</div> <div class="row">';

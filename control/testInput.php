@@ -1,6 +1,12 @@
 <?php
 
 function SanitiseData( $data, $default = null ) {
+	if (!empty($data)) {
+		return testUserInput($data);
+	} else {
+		return $default;
+	}
+	
 	return !empty( $data ) ? testUserInput( $data ) : $default;
 }
 

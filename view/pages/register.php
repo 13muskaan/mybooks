@@ -2,11 +2,11 @@
 $whoCanAccess = [ 1 ];
 
 include( 'header.php' );
-include( 'navigationbar.php' )
-?> <!-- use transactions. -->
+include( 'navigationbar.php' );
+?>
 
 <head>
-	<!--<meta charset="UTF-8">-->
+
 	<title>Register</title>
 	<script>
 		$( document ).ready( function () {
@@ -55,5 +55,6 @@ include( 'navigationbar.php' )
 			</div>
 		</div>
 	</div>
+	<?php include('footer.php');?>
 </body>
 </html>
