@@ -30,19 +30,19 @@ if ( empty( $email ) || empty( $password ) ) {
 	} else {
 		$result = $stmt->fetch();
 		if ( password_verify( $password, $result[ 'password' ] ) ) {
-			
-			
+
+
 			$_SESSION[ 'role' ] = $result[ 'role' ];
-			
-			$user_sql = "SELECT * FROM users WHERE loginID = " . $result['loginID'];
-			
-			$stmt = $conn->prepare($user_sql);
+
+			$user_sql = "SELECT * FROM users WHERE loginID = " . $result[ 'loginID' ];
+
+			$stmt = $conn->prepare( $user_sql );
 			$stmt->execute();
 			$result = $stmt->fetch();
-			
+
 			$_SESSION[ 'userID' ] = $result[ 'userID' ];
-			
-			
+
+
 			$_SESSION[ 'message' ] = "Login successful";
 			header( 'Location: ../view/pages/viewbooks.php' );
 		} else {

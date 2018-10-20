@@ -67,7 +67,7 @@ $row = $stmt->fetch();
 		<!--<form role="form" width="50%;" method="post" action="../../control/managebooks_process.php?UpdateID=<?php //echo $row['BookID']; ?>">-->
 
 
-		<form role="form" width="50%" method="post" action="../../model/managebooks_process.php?UpdateID=<?php echo $_GET['UpdateID']; ?>">
+		<form role="form" width="50%" method="post" action="../../model/managebooks_process.php?UpdateID=<?php echo $_GET['UpdateID']; ?>" enctype="multipart/form-data">
 			<br style="clear:both">
 			<h3 style="margin-bottom: 25px; text-align: center;">Update book details.</h3>
 			<div class="form-group">
@@ -88,8 +88,17 @@ $row = $stmt->fetch();
 			<div class="form-group">
 				<input type="text" class="form-control" id="millionsold" name="millionssold" placeholder="Millions Sold" value="<?php echo $row['MillionsSold']; ?>" required>
 			</div>
+			
 			<div class="form-group">
-
+				<div class="text-center">
+					<img src="<?php echo $image ?>" class="avatar img-thumbnail" alt="cover">
+					<h6>Upload a coverimage...</h6>
+					<input type="file" name="image" id="fileToUpload" size="50" class="text-center center-block well well-sm">
+					<div id=" imageAlert " class="alert alert-danger " style="display: none; "></div>
+				</div>
+			</div>
+			
+			<div class="form-group">
 				<input type="submit" id="submit" name="submit" class="btn btn-primary">
 			</div>
 		</form>

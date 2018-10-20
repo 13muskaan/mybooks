@@ -6,147 +6,147 @@ include( '../../model/dbconnection.php' );
 
 ?>
 
-	<style>
-		.red {
-			color: red;
-		}
-		
-		.form-area {
-			background-color: #FAFAFA;
-			padding: 10px 40px 60px;
-			margin: 10px 0px 60px;
-			border: 1px solid GREY;
-		}
-	</style>
-	<script>
-		$( document ).ready( function () {
-			$( '#characterLeft' ).text( '140 characters left' );
-			$( '#message' ).keydown( function () {
-				var max = 140;
-				var len = $( this ).val().length;
-				if ( len >= max ) {
-					$( '#characterLeft' ).text( 'You have reached the limit' );
-					$( '#characterLeft' ).addClass( 'red' );
-					$( '#btnSubmit' ).addClass( 'disabled' );
-				} else {
-					var ch = max - len;
-					$( '#characterLeft' ).text( ch + ' characters left' );
-					$( '#btnSubmit' ).removeClass( 'disabled' );
-					$( '#characterLeft' ).removeClass( 'red' );
-				}
-			} );
-		} );
-	</script>
-
-	<script>
-		$( document ).ready( function () {
-			var date_input = $( 'input[name="newAuthorBirthDate"]' ); //our date input has the name "date"
-			var container = $( '.bootstrap-iso form' ).length > 0 ? $( '.bootstrap-iso form' ).parent() : "body";
-			var options = {
-				format: "yyyy",
-				endDate: 0,
-				startView: 2,
-				minViewMode: 2,
-				container: container,
-				autoclose: true
-			};
-			date_input.datepicker( options );
-
-			date_input = $( 'input[name="newAuthorDeathDate"]' ); //our date input has the name "date"
-
-			date_input.datepicker( options );
-			
-			date_input = $( 'input[name="yearofpublication"]' );
-			
-			date_input.datepicker( options );
-			
-		} )
-	</script>
-	<script>
-		//FORM SELECTOR SCRIPTS
-
-		//TITLE
-		var origTitleCheck;
-		var origTitleInput;
-		var origTitleValue = ""; //A variable to store the original title if the check box is unchecked just in case
-
-		function origTitleSelect() { //Function that shows/hides the original title input, and stores the value in case of unchecking
-			console.log( origTitleInput.style.display );
-			if ( origTitleCheck.checked ) {
-				origTitleInput.style.display = "block";
-				origTitleInput.value = origTitleValue;
+<style>
+	.red {
+		color: red;
+	}
+	
+	.form-area {
+		background-color: #FAFAFA;
+		padding: 10px 40px 60px;
+		margin: 10px 0px 60px;
+		border: 1px solid GREY;
+	}
+</style>
+<script>
+	$( document ).ready( function () {
+		$( '#characterLeft' ).text( '140 characters left' );
+		$( '#message' ).keydown( function () {
+			var max = 140;
+			var len = $( this ).val().length;
+			if ( len >= max ) {
+				$( '#characterLeft' ).text( 'You have reached the limit' );
+				$( '#characterLeft' ).addClass( 'red' );
+				$( '#btnSubmit' ).addClass( 'disabled' );
 			} else {
-				origTitleInput.style.display = "none";
-				origTitleValue = origTitleInput.value;
-				origTitleInput.value = "";
+				var ch = max - len;
+				$( '#characterLeft' ).text( ch + ' characters left' );
+				$( '#btnSubmit' ).removeClass( 'disabled' );
+				$( '#characterLeft' ).removeClass( 'red' );
 			}
+		} );
+	} );
+</script>
+
+<script>
+	$( document ).ready( function () {
+		var date_input = $( 'input[name="newAuthorBirthDate"]' ); //our date input has the name "date"
+		var container = $( '.bootstrap-iso form' ).length > 0 ? $( '.bootstrap-iso form' ).parent() : "body";
+		var options = {
+			format: "yyyy",
+			endDate: 0,
+			startView: 2,
+			minViewMode: 2,
+			container: container,
+			autoclose: true
+		};
+		date_input.datepicker( options );
+
+		date_input = $( 'input[name="newAuthorDeathDate"]' ); //our date input has the name "date"
+
+		date_input.datepicker( options );
+
+		date_input = $( 'input[name="yearofpublication"]' );
+
+		date_input.datepicker( options );
+
+	} )
+</script>
+<script>
+	//FORM SELECTOR SCRIPTS
+
+	//TITLE
+	var origTitleCheck;
+	var origTitleInput;
+	var origTitleValue = ""; //A variable to store the original title if the check box is unchecked just in case
+
+	function origTitleSelect() { //Function that shows/hides the original title input, and stores the value in case of unchecking
+		console.log( origTitleInput.style.display );
+		if ( origTitleCheck.checked ) {
+			origTitleInput.style.display = "block";
+			origTitleInput.value = origTitleValue;
+		} else {
+			origTitleInput.style.display = "none";
+			origTitleValue = origTitleInput.value;
+			origTitleInput.value = "";
 		}
+	}
 
-		//AUTHOR
-		var authorRadios; //List of two elements, the radio buttons
-		var existingAuthorSelect; //Select author input
-		var newAuthorInputs; //New author input
-		var newAuthorValues;
+	//AUTHOR
+	var authorRadios; //List of two elements, the radio buttons
+	var existingAuthorSelect; //Select author input
+	var newAuthorInputs; //New author input
+	var newAuthorValues;
 
-		function AuthorRadios() {
+	function AuthorRadios() {
 
-			if ( authorRadios[ 0 ].checked ) {
-				existingAuthorSelect.style.display = "block";
-				newAuthorInputs.style.display = "none";
+		if ( authorRadios[ 0 ].checked ) {
+			existingAuthorSelect.style.display = "block";
+			newAuthorInputs.style.display = "none";
 
-				for ( var i = 0; i < newAuthorInputs.children.length; i++ ) {
-					if ( newAuthorInputs.children[ i ].type = HTMLLabelElement ) {
-						continue;
-					}
-
-					newAuthorValues[ i ] = newAuthorInputs.children[ i ].value;
-					newAuthorInputs.children[ i ].value = "";
+			for ( var i = 0; i < newAuthorInputs.children.length; i++ ) {
+				if ( newAuthorInputs.children[ i ].type = HTMLLabelElement ) {
+					continue;
 				}
 
-				return;
+				newAuthorValues[ i ] = newAuthorInputs.children[ i ].value;
+				newAuthorInputs.children[ i ].value = "";
 			}
 
-			if ( authorRadios[ 1 ].checked ) {
+			return;
+		}
 
-				newAuthorInputs.style.display = "block";
-				existingAuthorSelect.style.display = "none";
+		if ( authorRadios[ 1 ].checked ) {
+
+			newAuthorInputs.style.display = "block";
+			existingAuthorSelect.style.display = "none";
 
 
-				for ( var i = 0; i < newAuthorInputs.children.length; i++ ) {
-					if ( newAuthorInputs.children[ i ].type = HTMLLabelElement ) {
-						continue;
-					}
-
-					newAuthorInputs.children[ i ].value = newAuthorValues[ i ];
+			for ( var i = 0; i < newAuthorInputs.children.length; i++ ) {
+				if ( newAuthorInputs.children[ i ].type = HTMLLabelElement ) {
+					continue;
 				}
 
-				return;
+				newAuthorInputs.children[ i ].value = newAuthorValues[ i ];
 			}
 
-			console.error( "Author Radio code was run without either radio being selected" );
+			return;
 		}
 
-		//Variable setting
-		document.onready = function () {
-			origTitleCheck = document.getElementById( "origTitleCheck" ); //Check box
-			origTitleInput = document.getElementById( "origTitleInput" ); //Input
-			
-			newAuthorInputs = document.getElementById( "newAuthor" );
-			newAuthorValues = Array( newAuthorInputs.length );
-			existingAuthorSelect = document.getElementById( "existingAuthor" );
-			
-			
+		console.error( "Author Radio code was run without either radio being selected" );
+	}
 
-			authorRadios = document.getElementById( "authorRadios" ).children;
-			var temparr = Array( authorRadios.length );
+	//Variable setting
+	document.onready = function () {
+		origTitleCheck = document.getElementById( "origTitleCheck" ); //Check box
+		origTitleInput = document.getElementById( "origTitleInput" ); //Input
 
-			for ( var i = 0; i < authorRadios.length; i++ ) {
-				temparr[ i ] = authorRadios[ i ].children[ 0 ];
-			}
+		newAuthorInputs = document.getElementById( "newAuthor" );
+		newAuthorValues = Array( newAuthorInputs.length );
+		existingAuthorSelect = document.getElementById( "existingAuthor" );
 
-			authorRadios = temparr;
+
+
+		authorRadios = document.getElementById( "authorRadios" ).children;
+		var temparr = Array( authorRadios.length );
+
+		for ( var i = 0; i < authorRadios.length; i++ ) {
+			temparr[ i ] = authorRadios[ i ].children[ 0 ];
 		}
-	</script>
+
+		authorRadios = temparr;
+	}
+</script>
 </head>
 
 <body>
@@ -195,8 +195,8 @@ include( '../../model/dbconnection.php' );
 			<h4 style="margin-bottom: 25px; text-align: center;">Author</h4>
 
 			<div class="form-group" id="authorRadios">
-				<label class="radio-inline"><input type="radio" name="newAuthorRadio" value="false" onClick="AuthorRadios()" checked>Choose Existing Author</label>
-				<label class="radio-inline"><input type="radio" name="newAuthorRadio" value="true" onClick="AuthorRadios()">Create New Author</label>
+				<label class="radio-inline"><input type="radio" name="newAuthorRadio" value="0" onClick="AuthorRadios()" checked>Choose Existing Author</label>
+				<label class="radio-inline"><input type="radio" name="newAuthorRadio" value="1" onClick="AuthorRadios()">Create New Author</label>
 			</div>
 
 			<div class="form-group" id="existingAuthor">
@@ -244,18 +244,16 @@ include( '../../model/dbconnection.php' );
 			<div class="form-group">
 				<div class="text-center">
 					<img src="<?php echo $image ?>" class="avatar img-thumbnail" alt="cover">
-					<h6>Upload a photo...</h6>
-
+					<h6>Upload a coverimage...</h6>
 					<input type="file" name="image" id="fileToUpload" size="50" class="text-center center-block well well-sm">
-
 					<div id=" imageAlert " class="alert alert-danger " style="display: none; "></div>
 				</div>
-				<div class="form-group">
+			</div>
+			
+			<div class="form-group">
 					<input type="submit" id="submit" name="submit" class="btn btn-primary ">
-				</div>
+			</div>
 		</form>
-
-		</div>
 	</div>
 	<footer class="container-fluid text-center ">
 		<?php include('footer.php');?>
