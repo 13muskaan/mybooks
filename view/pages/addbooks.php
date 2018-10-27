@@ -18,50 +18,9 @@ include( '../../model/dbconnection.php' );
 		border: 1px solid GREY;
 	}
 </style>
-<script>
-	$( document ).ready( function () {
-		$( '#characterLeft' ).text( '140 characters left' );
-		$( '#message' ).keydown( function () {
-			var max = 140;
-			var len = $( this ).val().length;
-			if ( len >= max ) {
-				$( '#characterLeft' ).text( 'You have reached the limit' );
-				$( '#characterLeft' ).addClass( 'red' );
-				$( '#btnSubmit' ).addClass( 'disabled' );
-			} else {
-				var ch = max - len;
-				$( '#characterLeft' ).text( ch + ' characters left' );
-				$( '#btnSubmit' ).removeClass( 'disabled' );
-				$( '#characterLeft' ).removeClass( 'red' );
-			}
-		} );
-	} );
-</script>
 
-<script>
-	$( document ).ready( function () {
-		var date_input = $( 'input[name="newAuthorBirthDate"]' ); //our date input has the name "date"
-		var container = $( '.bootstrap-iso form' ).length > 0 ? $( '.bootstrap-iso form' ).parent() : "body";
-		var options = {
-			format: "yyyy",
-			endDate: 0,
-			startView: 2,
-			minViewMode: 2,
-			container: container,
-			autoclose: true
-		};
-		date_input.datepicker( options );
+<script src="../JS/authorinput.js" type="text/javascript"></script>
 
-		date_input = $( 'input[name="newAuthorDeathDate"]' ); //our date input has the name "date"
-
-		date_input.datepicker( options );
-
-		date_input = $( 'input[name="yearofpublication"]' );
-
-		date_input.datepicker( options );
-
-	} )
-</script>
 <script>
 	//FORM SELECTOR SCRIPTS
 
@@ -82,71 +41,14 @@ include( '../../model/dbconnection.php' );
 		}
 	}
 
-	//AUTHOR
-	var authorRadios; //List of two elements, the radio buttons
-	var existingAuthorSelect; //Select author input
-	var newAuthorInputs; //New author input
-	var newAuthorValues;
-
-	function AuthorRadios() {
-
-		if ( authorRadios[ 0 ].checked ) {
-			existingAuthorSelect.style.display = "block";
-			newAuthorInputs.style.display = "none";
-
-			for ( var i = 0; i < newAuthorInputs.children.length; i++ ) {
-				if ( newAuthorInputs.children[ i ].type = HTMLLabelElement ) {
-					continue;
-				}
-
-				newAuthorValues[ i ] = newAuthorInputs.children[ i ].value;
-				newAuthorInputs.children[ i ].value = "";
-			}
-
-			return;
-		}
-
-		if ( authorRadios[ 1 ].checked ) {
-
-			newAuthorInputs.style.display = "block";
-			existingAuthorSelect.style.display = "none";
-
-
-			for ( var i = 0; i < newAuthorInputs.children.length; i++ ) {
-				if ( newAuthorInputs.children[ i ].type = HTMLLabelElement ) {
-					continue;
-				}
-
-				newAuthorInputs.children[ i ].value = newAuthorValues[ i ];
-			}
-
-			return;
-		}
-
-		console.error( "Author Radio code was run without either radio being selected" );
-	}
-
-	//Variable setting
-	document.onready = function () {
+document.onready = function () {
 		origTitleCheck = document.getElementById( "origTitleCheck" ); //Check box
 		origTitleInput = document.getElementById( "origTitleInput" ); //Input
 
-		newAuthorInputs = document.getElementById( "newAuthor" );
-		newAuthorValues = Array( newAuthorInputs.length );
-		existingAuthorSelect = document.getElementById( "existingAuthor" );
-
-
-
-		authorRadios = document.getElementById( "authorRadios" ).children;
-		var temparr = Array( authorRadios.length );
-
-		for ( var i = 0; i < authorRadios.length; i++ ) {
-			temparr[ i ] = authorRadios[ i ].children[ 0 ];
-		}
-
-		authorRadios = temparr;
-	}
+		AuthorSetup();
+	};
 </script>
+
 </head>
 
 <body>

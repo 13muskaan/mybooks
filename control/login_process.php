@@ -1,10 +1,11 @@
 <?php
 include '../model/dbconnection.php';
+include 'testinput.php';
 //include '../session.php';
 
 session_start();
-$email = $_POST[ 'email' ];
-$password = $_POST[ 'pass' ];
+$email = SanitiseData($_POST[ 'email' ]);
+$password = SanitiseData($_POST[ 'pass' ]);
 $message = "";
 
 //When registering, store password in SQL Statement as $hash instead of $password:

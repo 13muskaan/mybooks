@@ -26,6 +26,24 @@ include( '../../model/dbconnection.php' );
 		<div class="container text-center">
 			<h1>My Books</h1>
 			<p>View all books.</p>
+			<p><?php 
+				$stmt = $conn->prepare("SELECT * FROM login INNER JOIN users ON login.loginID = users.loginID WHERE userID = " . $_SESSION ['userID']);
+				
+				$stmt->execute();
+				
+				$res = $stmt->FetchAll()[0];
+				
+				echo "Current User: " . $res['firstname'] . " " . $res['lastname'] . " (";
+				
+				if ($_SESSION['role'] == 1) {
+					echo "admin";
+				} else {
+					echo "user";
+				}
+				
+				
+				
+				echo ")"; ?></p>
 		</div>
 	</div>
 
@@ -46,7 +64,7 @@ include( '../../model/dbconnection.php' );
 	<div class="container">
 		<?php 
 		  
-		  $contentquery = "SELECT * FROM book";
+		  $contentquery = "SELECT * FROM book INNER JOIN author ON book.AuthorID = author.AuthorID";
 		  $stmt = $conn->prepare($contentquery);
 		  $stmt->execute();
 		  $staticresult = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -68,12 +86,13 @@ include( '../../model/dbconnection.php' );
 			  
 		  echo'<div class="col-sm-4"> 
 		  			<div class="panel panel-primary">';
-		  echo'<div class="panel-heading">', '<p>', 'Book Title', '</p>',$row['BookTitle'], '</div>';
-		  echo'<div class="panel-heading">', '<p>', 'Year of Publication', '</p>', $row['YearofPublication'], '</div>';
-		  echo'<div class="panel-heading">', '<p>', 'Genre', '</p>', $row['Genre'], '</div>';
-		  echo'<div class="panel-heading">', '<p>', 'Language', '</p>', $row['LanguageWritten'], '</div>';
+		  echo'<div class="panel-heading" style="background-color: #69C">', '<p><strong>', 'Book Title', '</strong></p>',$row['BookTitle'], '</div>';
+		  echo'<div class="panel-heading">', '<p><strong>', 'Author', '</strong></p>',$row['Name'] . " " . $row['Surname'], '</div>';
+		  echo'<div class="panel-heading" style="background-color: #69C">', '<p><strong>', 'Year of Publication', '</strong></p>', $row['YearofPublication'], '</div>';
+		  echo'<div class="panel-heading">', '<p><strong>', 'Genre', '</strong></p>', $row['Genre'], '</div>';
+		  echo'<div class="panel-heading" style="background-color: #69C">', '<p><strong>', 'Language', '</strong></p>', $row['LanguageWritten'], '</div>';
 		  echo '<div class="panel-body"><img src="', "../" . $row['CoverImage'] ,'" class="img-responsive" style="width:100%" alt="Image"></div>';
-		  echo '<div class="panel-footer">', '<p>', 'Millions Sold: ', $row['MillionsSold'], '</p>','</div>';
+		  echo '<div class="panel-footer">', '<p><strong>', 'Millions Sold: ', $row['MillionsSold'], '</strong></p>','</div>';
 			  
 			echo '<a href="../../model/managebooks_process.php?DeleteID='. $row['BookID'] .'" class="btn btn-primary a-btn-slide-text">
        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>

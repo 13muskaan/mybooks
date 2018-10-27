@@ -15,6 +15,8 @@ $stmt->execute();
 
 $row = $stmt->fetch();
 
+$image = "../" . $row['CoverImage'];
+
 ?>
 
 <head>
@@ -31,6 +33,8 @@ $row = $stmt->fetch();
 			margin-bottom: 0;
 		}
 	</style>
+	
+	<script src="../JS/authorinput.js" type="text/javascript"></script>
 </head>
 <body>
 
@@ -73,9 +77,51 @@ $row = $stmt->fetch();
 			<div class="form-group">
 				<input type="text" class="form-control" id="bookTitle" name="newbooktitle" placeholder="Book Title" value="<?php echo $row['BookTitle']; ?>" required>
 			</div>
-			<div class="form-group">
-				<input type="text" class="form-control" id="authorid" name="authorid" placeholder="AuthorID" value="<?php echo $row['AuthorID']; ?>" required>
+			
+			<hr class="hr-primary">
+			<h4 style="margin-bottom: 25px; text-align: center;">Author</h4>
+
+			<div class="form-group" id="authorRadios">
+				<label class="radio-inline"><input type="radio" name="newAuthorRadio" value="0" onClick="AuthorRadios()" checked>Choose Existing Author</label>
+				<label class="radio-inline"><input type="radio" name="newAuthorRadio" value="1" onClick="AuthorRadios()">Create New Author</label>
 			</div>
+
+			<div class="form-group" id="existingAuthor">
+				<label>Select the author from the list:</label>
+				<select class="form-control" name="existingAuthorID">
+					<?php 
+					$authorSQL = "SELECT * FROM Author";
+					$stmt = $conn->prepare( $authorSQL );
+					$stmt->execute();
+					$staticResults = $stmt->FetchAll();
+					foreach ($staticResults as $result) {
+						if ($result['AuthorID'] == 0) {
+							continue;
+						}
+						echo "<option value=\"" . $result['AuthorID'] . "\"";
+						
+						if ($result['AuthorID'] == $row['AuthorID']) {
+							echo "selected";
+							
+						}
+						
+						echo ">" . $result['Name'] . " " . $result['Surname'] . "</option>";
+					}
+					?>
+				</select>
+			</div>
+
+			<div class="form-group" id="newAuthor" style="display: none">
+				<label for="newAuthor">Fill in the Author's Details:</label>
+				<input type="text" class="form-control" id="newAuthorName" name="newAuthorName" placeholder="First Name">
+				<input type="text" class="form-control" id="newAuthorSurname" name="newAuthorSurname" placeholder="Surname(s)">
+				<input type="text" class="form-control" id="newAuthorNationality" name="newAuthorNationality" placeholder="Nationality">
+				<input class="form-control" id="birthDate" name="newAuthorBirthDate" placeholder="Year of Birth" type="text"/>
+				<input class="form-control" id="deathDate" name="newAuthorDeathDate" placeholder="Year of Death" type="text"/>
+			</div>
+			<hr class="hr-primary">
+			
+			
 			<div class="form-group">
 				<input type="text" class="form-control" id="genre" name="genre" placeholder="Genre" value="<?php echo $row['Genre']; ?>" required>
 			</div>

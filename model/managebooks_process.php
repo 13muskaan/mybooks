@@ -122,6 +122,8 @@ if ( isset( $_GET[ 'newBook' ] ) ) {
 if ( isset( $_POST[ "newbooktitle" ] ) && isset( $_GET[ 'UpdateID' ] ) ) {
 	try {
 
+		$conn->beginTransaction();
+		
 		$new = array();
 
 		$new[ 0 ] = SanitiseData( $_GET[ 'UpdateID' ] );
@@ -130,12 +132,37 @@ if ( isset( $_POST[ "newbooktitle" ] ) && isset( $_GET[ 'UpdateID' ] ) ) {
 		$new[ 3 ] = SanitiseData( $_POST[ 'genre' ], 'un-genre' );
 		$new[ 4 ] = SanitiseData( $_POST[ 'millionssold' ], '0' );
 		$new[ 5 ] = SanitiseData( $_POST[ 'language' ], 'English' );
-		$new[ 6 ] = SanitiseData( $_POST[ 'authorid' ], '0' );
 		
 		
-		
-		$conn->beginTransaction();
+		//Author Handling
+		if ( $_POST[ 'newAuthorRadio' ] === '1' ) {
+			$authorFirstName = SanitiseData( $_POST[ 'newAuthorName' ] );
+			$authorSurname = SanitiseData( $_POST[ 'newAuthorSurname' ] );
+			$authorNationality = SanitiseData( $_POST[ 'newAuthorNationality' ] );
+			$authorBirthDate = SanitiseData( $_POST[ 'newAuthorBirthDate' ] );
+			$authorDeathDate = SanitiseData( $_POST[ 'newAuthorDeathDate' ] );
 
+			$insertsql = "INSERT INTO author (Name, Surname, Nationality, BirthYear, DeathYear) VALUES (:n, :sn, :nat, :by, :dy)";
+
+			$stmt = $conn->prepare( $insertsql );
+
+			$stmt->bindParam( ':n', $authorFirstName, PDO::PARAM_STR );
+			$stmt->bindParam( ':sn', $authorSurname, PDO::PARAM_STR );
+			$stmt->bindParam( ':nat', $authorNationality, PDO::PARAM_STR );
+			$stmt->bindParam( ':by', $authorBirthDate, PDO::PARAM_STR );
+			$stmt->bindParam( ':dy', $authorDeathDate, PDO::PARAM_STR );
+
+			$stmt->execute();
+
+			$AuthorID = $conn->lastInsertId();
+
+			$log = $log . " - New author (ID: " . $AuthorID . "): " . $authorFirstName . " " . $authorSurname . " was created as well.";
+		} else {
+			$AuthorID = $_POST[ 'existingAuthorID' ];
+		}
+		
+		$new[ 6 ] = SanitiseData( $AuthorID, '0' );
+		
 		$SQL = "SELECT BookID, BookTitle, YearofPublication, Genre, MillionsSold, LanguageWritten, AuthorID FROM book WHERE BookID = :id";
 
 		$stmt = $conn->prepare( $SQL );
