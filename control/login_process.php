@@ -1,8 +1,9 @@
 <?php
-include '../model/dbconnection.php';
-include 'testinput.php';
-//include '../session.php';
 
+// Include database connection and sanistise input files. 
+include ('../model/dbconnection.php');
+include ('testinput.php');
+//
 session_start();
 $email = SanitiseData($_POST[ 'email' ]);
 $password = SanitiseData($_POST[ 'pass' ]);
@@ -12,8 +13,10 @@ $message = "";
 $hash = password_hash( $password, PASSWORD_DEFAULT );
 
 if ( empty( $email ) || empty( $password ) ) {
+	
 	$message = "username and password can't be empty";
 } else {
+	
 	$login_sql = "SELECT * FROM login WHERE email = :email";
 
 	$stmt = $conn->prepare( $login_sql );
@@ -30,8 +33,9 @@ if ( empty( $email ) || empty( $password ) ) {
 		header( 'Location: ../view/pages/login.php' );
 	} else {
 		$result = $stmt->fetch();
+		// verify the password
 		if ( password_verify( $password, $result[ 'password' ] ) ) {
-
+			
 
 			$_SESSION[ 'role' ] = $result[ 'role' ];
 

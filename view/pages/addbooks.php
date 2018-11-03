@@ -2,7 +2,7 @@
 $whoCanAccess = [ 1, 2 ];
 include( 'header.php' );
 include( 'navigationbar.php' );
-include( '../../model/dbconnection.php' );
+
 
 ?>
 
@@ -58,20 +58,7 @@ document.onready = function () {
 			<p>Add New Books.</p>
 		</div>
 	</div>
-	<?php
-	if ( isset( $_SESSION[ 'error' ] ) ) {
-		if ( $_SESSION[ 'error' ] != "" ) {
-			echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
-			$_SESSION[ 'error' ] = "";
-		}
-	}
-	if ( isset( $_SESSION[ 'message' ] ) ) {
-		if ( $_SESSION[ 'message' ] != "" ) {
-			echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
-			$_SESSION[ 'message' ] = "";
-		}
-	}
-	?>
+	<?php include ('../../model/message_boxes.php'); ?>
 	<div class="container1" align="center" ; width="20%;">
 		<form role="form" width="50%;" action="../../model/managebooks_process.php?newBook=true" method="post" enctype="multipart/form-data">
 			<br style="clear:both">
@@ -145,7 +132,6 @@ document.onready = function () {
 			</div>
 			<div class="form-group">
 				<div class="text-center">
-					<img src="<?php echo $image ?>" class="avatar img-thumbnail" alt="cover">
 					<h6>Upload a coverimage...</h6>
 					<input type="file" name="image" id="fileToUpload" size="50" class="text-center center-block well well-sm">
 					<div id=" imageAlert " class="alert alert-danger " style="display: none; "></div>

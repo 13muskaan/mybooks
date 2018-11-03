@@ -1,5 +1,6 @@
 <?php
 include( '../../control/session.php' );
+include( '../../model/dbconnection.php' );
 ?>
 <!DOCTYPE html>
 <html>

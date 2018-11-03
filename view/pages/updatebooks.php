@@ -3,7 +3,7 @@ $whoCanAccess = [ 1, 2 ];
 include( 'header.php' );
 include( 'navigationbar.php' );
 
-include( '../../model/dbconnection.php' );
+//include( '../../model/dbconnection.php' );
 
 $selectsql = "SELECT * FROM book WHERE BookID = :id";
 
@@ -45,20 +45,7 @@ $image = "../" . $row['CoverImage'];
 		</div>
 	</div>
 
-	<?php
-	if ( isset( $_SESSION[ 'error' ] ) ) {
-		if ( $_SESSION[ 'error' ] != "" ) {
-			echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
-			$_SESSION[ 'error' ] = "";
-		}
-	}
-	if ( isset( $_SESSION[ 'message' ] ) ) {
-		if ( $_SESSION[ 'message' ] != "" ) {
-			echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
-			$_SESSION[ 'message' ] = "";
-		}
-	}
-	?>
+	<?php include ('../../model/message_boxes.php'); ?>
 
 	<a href="viewbooks.php" class="btn btn-primary a-btn-slide-text" style="align-items: center;">
        <span class="glyphicon glyphicon-back" aria-hidden="true"></span>

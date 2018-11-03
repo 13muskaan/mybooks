@@ -1,5 +1,7 @@
 <?php
 
+// Code to sanitise form input
+
 function SanitiseData( $data, $default = null ) {
 	if ( !empty( $data ) ) {
 		return testUserInput( $data );

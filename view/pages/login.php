@@ -43,20 +43,7 @@ include( 'header.php' );
 								Sign In</p>
 							<p style="color: aliceblue; text-align: center;"> Please sign in to have access.</p>
 							<!-- error messages-->
-							<?php
-							if ( isset( $_SESSION[ 'error' ] ) ) {
-								if ( $_SESSION[ 'error' ] != "" ) {
-									echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
-									$_SESSION[ 'error' ] = "";
-								}
-							}
-							if ( isset( $_SESSION[ 'message' ] ) ) {
-								if ( $_SESSION[ 'message' ] != "" ) {
-									echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
-									$_SESSION[ 'message' ] = "";
-								}
-							}
-							?>
+							<?php include ('../../model/message_boxes.php'); ?>
 							<input type="text" placeholder="Email" name="email" style="text-align: center" required/>
 							<input type="password" placeholder="Password" name="pass" style="text-align: center" required/>
 							<input type="submit" value="Sign In" class="btn btn-success btn-sm"/>

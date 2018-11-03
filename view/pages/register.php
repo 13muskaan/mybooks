@@ -40,14 +40,7 @@ include( 'navigationbar.php' );
 							<option value="1">Admin</option>
 						</select>
 
-						<?php
-						if ( isset( $_SESSION[ 'error' ] ) ) {
-							if ( $_SESSION[ 'error' ] != "" ) {
-								echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
-								$_SESSION[ 'error' ] = "";
-							}
-						}
-						?>
+						<?php include ('../../model/message_boxes.php'); ?>
 
 						<input type="submit" value="Register" class="btn btn-success btn-sm"/>
 					</form>
@@ -55,6 +48,6 @@ include( 'navigationbar.php' );
 			</div>
 		</div>
 	</div>
-	<?php include('footer.php');?>
+
 </body>
 </html>

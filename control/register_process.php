@@ -1,5 +1,6 @@
 <?php
 include( '../model/dbconnection.php' );
+include( 'user_manage.php');
 include('testinput.php');
 //include('session.php');
 session_start();
@@ -15,9 +16,6 @@ $lastname = SanitiseData($_POST[ 'lastname' ]);
 $role = SanitiseData($_POST[ 'role' ]);
 
 $_SESSION[ 'error' ] = "";
-
-//Hash password
-$hash = password_hash( $password, PASSWORD_DEFAULT );
 
 if ( empty( $email ) || empty( $password ) || empty( $firstname ) || empty( $lastname ) ) {
 	$_SESSION[ 'error' ] = "Please fill in all the input fields.";
@@ -60,10 +58,12 @@ if ( empty( $email ) || empty( $password ) || empty( $firstname ) || empty( $las
 	echo "<hr>Session error: " . $_SESSION[ 'error' ] . "<hr>";
 
 	if ( $_SESSION[ 'error' ] == "" ) {
-
-
+		
+		//Hash password
+		$hash = password_hash( $password, PASSWORD_DEFAULT );
+		
 		if ( newUser( $conn, $email, $hash, $role, $firstname, $lastname ) ) {
-			$_SESSION[ 'message' ] = 'user successfully created! Welcome ' . $_POST[ 'firstname' ] . "";
+			$_SESSION[ 'message' ] = 'User successfully created! Welcome ' . $_POST[ 'firstname' ] . " for me will ya?";
 			header( 'location:../view/pages/viewbooks.php' );
 		} else {
 			$_SESSION[ 'error' ] = 'database error - failed to insert user registration data';

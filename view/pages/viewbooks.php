@@ -3,7 +3,7 @@ $whoCanAccess = [ 1, 2 ];
 
 include( 'header.php' );
 include( 'navigationbar.php' );
-include( '../../model/dbconnection.php' );
+//include( '../../model/dbconnection.php' );
 ?>
 <head>
 	<title> View Books</title>
@@ -26,8 +26,9 @@ include( '../../model/dbconnection.php' );
 		<div class="container text-center">
 			<h1>My Books</h1>
 			<p>View all books.</p>
-			<p><?php 
-				$stmt = $conn->prepare("SELECT * FROM login INNER JOIN users ON login.loginID = users.loginID WHERE userID = " . $_SESSION ['userID']);
+			<p>
+				<?php 
+				$stmt = $conn->prepare("SELECT * FROM login INNER JOIN users ON login.loginID = users.loginID WHERE userID = " . $_SESSION['userID']);
 				
 				$stmt->execute();
 				
@@ -41,26 +42,13 @@ include( '../../model/dbconnection.php' );
 					echo "user";
 				}
 				
-				
-				
-				echo ")"; ?></p>
+				echo ")"; ?>
+			</p>
 		</div>
 	</div>
 
-	<?php
-	if ( isset( $_SESSION[ 'error' ] ) ) {
-		if ( $_SESSION[ 'error' ] != "" ) {
-			echo '<div class="alert alert-danger"><strong>ERROR: </strong>' . $_SESSION[ 'error' ] . '</div>';
-			$_SESSION[ 'error' ] = "";
-		}
-	}
-	if ( isset( $_SESSION[ 'message' ] ) ) {
-		if ( $_SESSION[ 'message' ] != "" ) {
-			echo '<div class="alert alert-success">' . $_SESSION[ 'message' ] . '</div>';
-			$_SESSION[ 'message' ] = "";
-		}
-	}
-	?>
+	<?php include ('../../model/message_boxes.php'); ?>
+	
 	<div class="container">
 		<?php 
 		  
@@ -73,7 +61,6 @@ include( '../../model/dbconnection.php' );
 		
 		$count = -1;
 		
-		
 		  foreach($staticresult as $row) {
 			  if ($row['AuthorID'] == 0) {
 				continue;  
@@ -82,7 +69,6 @@ include( '../../model/dbconnection.php' );
 			  if ($count % 3 == 2) {
 				  echo '</div> <div class="row">';
 			  }
-			  
 			  
 		  echo'<div class="col-sm-4"> 
 		  			<div class="panel panel-primary">';
@@ -109,7 +95,6 @@ include( '../../model/dbconnection.php' );
 			 
 			  $count++;
 		  }
-		
 ?>
 	</div>
 	</div>
