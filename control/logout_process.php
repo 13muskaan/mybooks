@@ -14,4 +14,3 @@ $_SESSION[ 'message' ] = "Logged out successfully";
 // Redirect to login page
 header( "location: ../view/pages/login.php" );
 ?>
-

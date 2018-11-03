@@ -6,12 +6,12 @@ session_start();
 
 function PageProtector( $whoCanAccess ) {
 	foreach ( $whoCanAccess as $i ) {
-		if (isset($_SESSION['role'])) {
+		if ( isset( $_SESSION[ 'role' ] ) ) {
 			if ( $i == $_SESSION[ 'role' ] ) {
 				return true;
 			}
 		} else {
-			if ($i == 0) {
+			if ( $i == 0 ) {
 				return true;
 			}
 		}
@@ -23,7 +23,7 @@ function PageProtector( $whoCanAccess ) {
 // Redirection of user depending on user role. 
 
 function Redirect() {
-	if (isset($_SESSION['role'])) {
+	if ( isset( $_SESSION[ 'role' ] ) ) {
 		if ( $_SESSION[ 'role' ] == 2 || $_SESSION[ 'role' ] == 1 ) {
 			$_SESSION[ 'error' ] = "You cannot view that page.";
 			header( "location: viewbooks.php" );
@@ -34,7 +34,7 @@ function Redirect() {
 	}
 }
 
-if ( isset( $whoCanAccess )) {
+if ( isset( $whoCanAccess ) ) {
 	if ( !PageProtector( $whoCanAccess ) ) {
 		Redirect();
 	}

@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jun 24, 2018 at 07:53 AM
--- Server version: 10.1.31-MariaDB
--- PHP Version: 5.6.35
+-- Host: localhost:8889
+-- Generation Time: Nov 03, 2018 at 07:09 AM
+-- Server version: 5.6.38
+-- PHP Version: 7.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -52,6 +50,7 @@ CREATE TABLE `author` (
 --
 
 INSERT INTO `author` (`AuthorID`, `Name`, `Surname`, `Nationality`, `BirthYear`, `DeathYear`) VALUES
+(0, 'Empty Author', 'for preserving logData', '', 0, NULL),
 (1, 'Miguel', 'de Cervantes Saavedra', 'Spanish', 1547, 1616),
 (2, 'Charles', 'Dickens', 'British', 1812, 1870),
 (3, 'J.R.R.', 'Tolkien', 'British', 1892, 1973),
@@ -61,49 +60,7 @@ INSERT INTO `author` (`AuthorID`, `Name`, `Surname`, `Nationality`, `BirthYear`,
 (7, 'Cao', 'Xueqin', 'Chinese', 1715, 1763),
 (8, 'Henry', ' Rider Haggard', 'British', 1856, 1925),
 (9, 'C.S.', 'Lewis', 'British', 1898, 1963),
-(13, '0', 'd', 'd', 1, 12),
-(32, '0', 'kl', 'k;l', 654, 546),
-(37, '0', 'l', 'lk', 54, 65),
-(38, '0', 'l,', 'l;k', 56, 45),
-(43, '0', '5', '1351', 135, 13),
-(44, '0', '46', '46', 45, 4564),
-(45, '0', '564564', '564564654', 465465, 6546),
-(46, '0', '654654', '6546', 64556, 4665),
-(47, '0', '564', '654', 564, 564),
-(48, '0', '456', '45', 64, 564),
-(49, '0', '6456465', '456456', 46556, 465),
-(50, '0', '45', '45', 4545, 45),
-(51, '0', '45', '45', 45, 45),
-(52, '0', '45', '45', 45, 45),
-(53, '0', '77', '77', 77, 77),
-(54, '0', '88', '88', 88, 88),
-(55, '0', '99', '99', 99, 99),
-(56, '0', '11', '11', 11, 11),
-(57, '0', '10', '10', 10, 10),
-(58, '0', '89', '89', 89, 89),
-(59, '0', '45', '45', 4, 545),
-(60, '0', '77', '77', 77, 77),
-(61, '0', '89', '89', 898, 9),
-(62, '0', '11', '11', 11, 11),
-(63, '0', '66', '66', 66, 66),
-(64, '0', '56', '56', 565, 6),
-(65, '0', '7', '7', 7, 7),
-(66, '0', '12', '1212', 12, 12),
-(67, '0', '12', '12', 12, 12),
-(68, '0', '7', '7', 7, 7),
-(69, '0', '78', '87', 87, 87),
-(70, '0', '77', '77', 77, 77),
-(71, '0', '78', '78', 78, 78),
-(72, '0', '88', '88', 88, 88),
-(73, '0', '87', '87', 8, 78),
-(74, '0', '78', '78', 787, 8),
-(75, '0', '87', '87', 87, 87),
-(76, '0', '78', '78', 78, 8),
-(77, '0', '878', '78', 78, 78),
-(78, '0', '87', '87', 87, 87),
-(79, '0', '78', '78', 78, 78),
-(80, '0', '78', '78', 78, 78),
-(81, '0', '78', '78', 78, 78);
+(16, 'Muskaan', 'Bakshi', 'English', 1998, NULL);
 
 -- --------------------------------------------------------
 
@@ -120,38 +77,25 @@ CREATE TABLE `book` (
   `MillionsSold` int(10) UNSIGNED NOT NULL,
   `LanguageWritten` varchar(30) NOT NULL,
   `AuthorID` int(10) UNSIGNED NOT NULL,
-  `coverName` varchar(255) NOT NULL,
-  `coverPath` varchar(255) NOT NULL,
-  `coverType` varchar(255) NOT NULL
+  `CoverImage` varchar(100) NOT NULL DEFAULT 'img/bookcovers/default.png'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `book`
 --
 
-INSERT INTO `book` (`BookID`, `BookTitle`, `OriginalTitle`, `YearofPublication`, `Genre`, `MillionsSold`, `LanguageWritten`, `AuthorID`, `coverName`, `coverPath`, `coverType`) VALUES
-(1, 'Don Quixote1', 'El Ingenioso Hidalgo Don Quixote de la Mancha', 16054, 'Novel', 500, 'Spanish', 1, '20180502034046DonQuixote.jpg', '../View/pics/', 'image/jpeg'),
-(2, 'A Tale of Two Cities', 'A Tale of Two Cities', 1859, 'Historical Fiction', 200, 'English', 2, '20180501105926aTaleofTwoCities.jpg', '../View/pics/', 'image/jpeg'),
-(3, 'The Lord of the Rings', 'The Lord of the Rings', 1954, 'Fantasy/Adventure', 150, 'English', 3, '20180501101400theLordOfTheRings.jpg', '../View/pics/', 'image/jpeg'),
-(4, 'The Litle Prince', 'Le Petit Prince', 1943, 'Fable', 142, 'French', 4, '20180501101416theLittlePrince.jpg', '../View/pics/', 'image/jpeg'),
-(6, 'And Then There Were None', 'Ten Little Niggers', 1939, 'Mystery', 100, 'English', 6, '20180501101444default.png', '../View/pics/', 'image/png'),
-(7, 'The Dream of the Red Chamber', 'The Story of the Stone', 1792, 'Novel', 100, 'Chinese', 7, '20180501101504redChamber.jpg', '../View/pics/', 'image/jpeg'),
-(8, 'The Hobbit', 'There and Back Again', 1937, 'High Fantasy', 100, 'English', 3, '20180501101515theHobbit.jpg', '../View/pics/', 'image/jpeg'),
-(9, 'She: A History of Adventure', 'She', 1886, 'FIction', 100, 'English', 8, '20180501101525She.jpg', '../View/pics/', 'image/jpeg'),
-(10, 'The Lion, the Witch and the Wardrobe', 'The Lion, the Witch and the Wardrobe', 1950, 'Fantasy', 85, 'English', 9, '20180501101535theLion.jpg', '../View/pics/', 'image/jpeg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `booklink`
---
-
-CREATE TABLE `booklink` (
-  `booklinkID` int(10) UNSIGNED NOT NULL,
-  `bookID` int(10) UNSIGNED NOT NULL,
-  `usersID` int(10) UNSIGNED NOT NULL,
-  `time` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `book` (`BookID`, `BookTitle`, `OriginalTitle`, `YearofPublication`, `Genre`, `MillionsSold`, `LanguageWritten`, `AuthorID`, `CoverImage`) VALUES
+(0, '{-Deleted Book-}', '{-This is to reference log data for deleted books-}', 0, '', 0, '', 0, ''),
+(1, 'Don Quixote', 'El Ingenioso Hidalgo Don Quixote de la Mancha', 1605, 'Novel', 500, 'Spanish', 1, 'img/bookcovers/1.jpg'),
+(2, 'A Tale of Two Cities', 'A Tale of Two Cities', 1859, 'Historical Fiction', 200, 'English', 2, 'img/bookcovers/2.jpg'),
+(3, 'The Lord of the Rings', 'The Lord of the Rings', 1954, 'Fantasy/Adventure', 150, 'English', 3, 'img/bookcovers/default.png'),
+(4, 'The Litle Prince', 'Le Petit Prince', 1943, 'Fable', 142, 'French', 4, 'img/bookcovers/4.jpg'),
+(6, 'And Then There Were None', 'Ten Little Niggers', 1939, 'Mystery', 100, 'English', 6, 'img/bookcovers/5.jpg'),
+(7, 'The Dream of the Red Chamber', 'The Story of the Stone', 1792, 'Novel', 100, 'Chinese', 7, 'img/bookcovers/6.jpg'),
+(8, 'The Hobbit', 'There and Back Again', 1937, 'High Fantasy', 100, 'English', 3, 'img/bookcovers/7.jpg'),
+(9, 'She: A History of Adventure', 'She', 1886, 'FIction', 100, 'English', 8, 'img/bookcovers/8.jpg'),
+(10, 'The Lion, the Witch and the Wardrobe', 'The Lion, the Witch and the Wardrobe', 1950, 'Fantasy', 85, 'English', 9, 'img/bookcovers/default.png'),
+(39, 'Test1', 'One', 2018, 'English Drama', 100, 'English', 16, 'img/bookcovers/39.jpg');
 
 -- --------------------------------------------------------
 
@@ -211,24 +155,85 @@ INSERT INTO `bookranking` (`RankingID`, `RankingScore`, `BookID`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `logData`
+--
+
+CREATE TABLE `logData` (
+  `logEntryID` int(10) UNSIGNED NOT NULL,
+  `bookID` int(10) UNSIGNED NOT NULL,
+  `userID` int(10) UNSIGNED NOT NULL,
+  `time` timestamp(6) NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  `description` text
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `logData`
+--
+
+INSERT INTO `logData` (`logEntryID`, `bookID`, `userID`, `time`, `description`) VALUES
+(2, 0, 1, '2018-10-20 08:26:10.810805', 'Muskaan Bakshi (ID: 1) deleted the book (ID: 21) titled: New Book'),
+(15, 0, 1, '2018-10-20 09:18:31.010255', 'Muskaan Bakshi (ID: 1) deleted the book (ID: 22) titled: The Rise of C#'),
+(18, 0, 1, '2018-10-22 01:32:16.237568', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 23) titled: Hello6'),
+(21, 8, 1, '2018-10-27 00:50:32.736393', 'Muskaan Bakshi (UserID: 1) updated BookID: 8 - Title: \"The Hobbit\" - Author ID updated from \"3\" to \"2\"'),
+(22, 8, 1, '2018-10-27 00:51:09.702940', 'Muskaan Bakshi (UserID: 1) updated BookID: 8 - Title: \"The Hobbit\" - Author ID updated from \"2\" to \"3\"'),
+(23, 1, 1, '2018-10-27 01:17:08.365049', 'Muskaan Bakshi (UserID: 1) updated BookID: 1 - Title: \"Don Quixote\" <- New Title, Old: \"Don Quixote1\"'),
+(30, 0, 1, '2018-10-27 02:00:28.065818', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 26) titled: Test'),
+(43, 0, 1, '2018-11-03 01:08:39.921678', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 25) titled: Heck1'),
+(44, 0, 1, '2018-11-03 01:10:39.062537', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 25) titled: '),
+(45, 0, 1, '2018-11-03 01:11:56.949206', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 25) titled: '),
+(46, 0, 1, '2018-11-03 01:13:52.263600', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 25) titled: '),
+(47, 0, 1, '2018-11-03 01:14:20.573571', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 29) titled: hibiscus'),
+(52, 0, 1, '2018-11-03 01:18:02.709328', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 31) titled: Heck'),
+(53, 0, 1, '2018-11-03 01:18:07.732281', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 32) titled: Heck'),
+(54, 0, 1, '2018-11-03 01:18:12.110608', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 33) titled: Heckening'),
+(55, 0, 1, '2018-11-03 01:19:39.922838', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 28) titled: hibiscus'),
+(56, 0, 1, '2018-11-03 01:19:47.304960', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 34) titled: Heckening'),
+(59, 0, 1, '2018-11-03 01:59:15.383406', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 36) titled: Ass'),
+(61, 0, 1, '2018-11-03 02:01:02.019939', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 35) titled: AssAssIn: Me'),
+(67, 0, 1, '2018-11-03 06:07:58.883456', 'Muskaan Bakshi (UserID: 1) deleted the book (ID: 38) titled: TestOne'),
+(68, 39, 1, '2018-11-03 06:08:38.951734', 'Muskaan Bakshi (UserID: 1) added Book: Test1');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `login`
+--
+
+CREATE TABLE `login` (
+  `loginID` int(10) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `role` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `login`
+--
+
+INSERT INTO `login` (`loginID`, `email`, `password`, `role`) VALUES
+(1, '13muskanbakshi@mybooks.com', '$2y$10$ql/x7Ac5zpdsMAzcHCRhWOi8ENs.33BS/OawREU6FOBWyY2BIkgpW', '1'),
+(2, 'user1@mybooks.com', '$2y$10$4kBSgcnKEKx8zP8Sg6q7buVRcqWWD395cLBzU6iNMkdN9JStmNEKy', '2');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
   `userID` int(10) UNSIGNED NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `role` varchar(25) NOT NULL
+  `loginID` int(10) NOT NULL DEFAULT '2',
+  `firstname` varchar(20) NOT NULL,
+  `lastname` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`userID`, `email`, `password`, `role`) VALUES
-(1, 'fadi', '$2y$10$hFnjNys5.sOPCbainr4HPO1yUJ6y8nJivh05V/wB6dQaXf19evGUq', '1'),
-(2, 'john', '$2y$10$96q6AALYMetPhHz2nsY0s.yOwn5xi5ZA8PSKauRN3WH.189mYDVL2', '2'),
-(3, '13muskanbakshi@gmail.com', 'Password1', '3');
+INSERT INTO `users` (`userID`, `loginID`, `firstname`, `lastname`) VALUES
+(1, 1, 'Muskaan', 'Bakshi'),
+(2, 2, 'User', 'One');
 
 --
 -- Indexes for dumped tables
@@ -238,10 +243,7 @@ INSERT INTO `users` (`userID`, `email`, `password`, `role`) VALUES
 -- Indexes for table `author`
 --
 ALTER TABLE `author`
-  ADD PRIMARY KEY (`AuthorID`),
-  ADD KEY `az` (`Name`),
-  ADD KEY `az1` (`Name`),
-  ADD KEY `az2` (`Name`);
+  ADD PRIMARY KEY (`AuthorID`);
 
 --
 -- Indexes for table `book`
@@ -250,14 +252,6 @@ ALTER TABLE `book`
   ADD PRIMARY KEY (`BookID`),
   ADD KEY `fk_authorID` (`AuthorID`),
   ADD KEY `indenxx` (`BookTitle`);
-
---
--- Indexes for table `booklink`
---
-ALTER TABLE `booklink`
-  ADD PRIMARY KEY (`booklinkID`),
-  ADD KEY `bookID` (`bookID`),
-  ADD KEY `usersID` (`usersID`);
 
 --
 -- Indexes for table `bookplot`
@@ -274,10 +268,25 @@ ALTER TABLE `bookranking`
   ADD KEY `fk_bookID` (`BookID`);
 
 --
+-- Indexes for table `logData`
+--
+ALTER TABLE `logData`
+  ADD PRIMARY KEY (`logEntryID`),
+  ADD KEY `bookID` (`bookID`),
+  ADD KEY `usersID` (`userID`);
+
+--
+-- Indexes for table `login`
+--
+ALTER TABLE `login`
+  ADD PRIMARY KEY (`loginID`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`userID`);
+  ADD PRIMARY KEY (`userID`),
+  ADD KEY `FKuserlogin` (`loginID`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -287,19 +296,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `author`
 --
 ALTER TABLE `author`
-  MODIFY `AuthorID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `AuthorID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `BookID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
---
--- AUTO_INCREMENT for table `booklink`
---
-ALTER TABLE `booklink`
-  MODIFY `booklinkID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `BookID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `bookplot`
@@ -314,10 +317,22 @@ ALTER TABLE `bookranking`
   MODIFY `RankingID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `logData`
+--
+ALTER TABLE `logData`
+  MODIFY `logEntryID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+
+--
+-- AUTO_INCREMENT for table `login`
+--
+ALTER TABLE `login`
+  MODIFY `loginID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `userID` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Constraints for dumped tables
@@ -330,13 +345,6 @@ ALTER TABLE `book`
   ADD CONSTRAINT `fk_authorID` FOREIGN KEY (`AuthorID`) REFERENCES `author` (`AuthorID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `booklink`
---
-ALTER TABLE `booklink`
-  ADD CONSTRAINT `booklink_ibfk_1` FOREIGN KEY (`bookID`) REFERENCES `book` (`BookID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `booklink_ibfk_2` FOREIGN KEY (`usersID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
 -- Constraints for table `bookplot`
 --
 ALTER TABLE `bookplot`
@@ -347,7 +355,19 @@ ALTER TABLE `bookplot`
 --
 ALTER TABLE `bookranking`
   ADD CONSTRAINT `fk_bookID` FOREIGN KEY (`BookID`) REFERENCES `book` (`BookID`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+
+--
+-- Constraints for table `logData`
+--
+ALTER TABLE `logData`
+  ADD CONSTRAINT `logdata_ibfk_1` FOREIGN KEY (`bookID`) REFERENCES `book` (`BookID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `logdata_ibfk_2` FOREIGN KEY (`userID`) REFERENCES `users` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `FKuserlogin` FOREIGN KEY (`loginID`) REFERENCES `login` (`loginID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

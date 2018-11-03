@@ -1,9 +1,10 @@
 <?php
+// Page protector
 $whoCanAccess = [ 1, 2 ];
 
 include( 'header.php' );
 include( 'navigationbar.php' );
-//include( '../../model/dbconnection.php' );
+
 ?>
 <head>
 	<title> View Books</title>
@@ -28,6 +29,8 @@ include( 'navigationbar.php' );
 			<p>View all books.</p>
 			<p>
 				<?php 
+				
+				// Code to show user information.
 				$stmt = $conn->prepare("SELECT * FROM login INNER JOIN users ON login.loginID = users.loginID WHERE userID = " . $_SESSION['userID']);
 				
 				$stmt->execute();
@@ -41,17 +44,16 @@ include( 'navigationbar.php' );
 				} else {
 					echo "user";
 				}
-				
 				echo ")"; ?>
 			</p>
 		</div>
 	</div>
 
 	<?php include ('../../model/message_boxes.php'); ?>
-	
+
 	<div class="container">
 		<?php 
-		  
+		  // Code to show all books and author information from the database. 
 		  $contentquery = "SELECT * FROM book INNER JOIN author ON book.AuthorID = author.AuthorID";
 		  $stmt = $conn->prepare($contentquery);
 		  $stmt->execute();

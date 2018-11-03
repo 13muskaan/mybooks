@@ -6,7 +6,6 @@
 $servername = "localhost";
 $username = "root";
 $password = "root"; // Use this code when using MacOs (MAMP)
-
 //$password= ""; // Use this code when using Windows (XAMPP)
 
 // try & catch statement.
@@ -18,16 +17,12 @@ try {
 
 	$conn->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-	// Set the PDO error mode to exception
+	// Set the PDO error mode to exception.
 
 } catch ( PDOException $e ) {
+
+	// Echo error.
 	echo "Connection failed: " . $e->getMessage();
 	die();
-
-	// Echo error
 }
-
-// 
-
-
 ?>

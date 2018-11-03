@@ -19,7 +19,7 @@ function uploadCover( $file, $BookID ) {
 	}
 	// Check if file already exists
 	if ( file_exists( $target_file ) ) {
-		unlink($target_file);
+		unlink( $target_file );
 	}
 	// Check file size
 	if ( $file[ "size" ] > 500000 ) {

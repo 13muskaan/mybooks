@@ -1,4 +1,6 @@
 <?
+
+// Page protection
 $whoCanAccess = [ 0 ];
 
 include( 'header.php' );

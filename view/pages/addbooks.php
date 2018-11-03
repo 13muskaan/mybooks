@@ -1,8 +1,10 @@
 <?php
+
+// Page protector
 $whoCanAccess = [ 1, 2 ];
+
 include( 'header.php' );
 include( 'navigationbar.php' );
-
 
 ?>
 
@@ -41,7 +43,7 @@ include( 'navigationbar.php' );
 		}
 	}
 
-document.onready = function () {
+	document.onready = function () {
 		origTitleCheck = document.getElementById( "origTitleCheck" ); //Check box
 		origTitleInput = document.getElementById( "origTitleInput" ); //Input
 
@@ -64,7 +66,6 @@ document.onready = function () {
 			<br style="clear:both">
 			<h3 style="margin-bottom: 25px; text-align: center;">New book details.</h3>
 
-
 			<h4 style="margin-bottom: 25px; text-align: center;">Title</h4>
 			<div class="form-group">
 				<input type="text" class="form-control" id="bookTitle" name="booktitle" placeholder="Current Book Title*" required>
@@ -77,8 +78,6 @@ document.onready = function () {
 			<div class="form-group" id="origTitleInput" style="display: none;">
 				<input type="text" class="form-control" id="originalTitle" name="originaltitle" placeholder="Original Title">
 			</div>
-
-
 
 			<hr class="hr-primary">
 			<h4 style="margin-bottom: 25px; text-align: center;">Author</h4>
@@ -137,9 +136,9 @@ document.onready = function () {
 					<div id=" imageAlert " class="alert alert-danger " style="display: none; "></div>
 				</div>
 			</div>
-			
+
 			<div class="form-group">
-					<input type="submit" id="submit" name="submit" class="btn btn-primary ">
+				<input type="submit" id="submit" name="submit" class="btn btn-primary ">
 			</div>
 		</form>
 	</div>

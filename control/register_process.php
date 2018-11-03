@@ -1,22 +1,28 @@
 <?php
+// Include files.
 include( '../model/dbconnection.php' );
-include( 'user_manage.php');
-include('testinput.php');
-//include('session.php');
+include( 'user_manage.php' );
+include( 'testinput.php' );
+
+// Start session.
 session_start();
 
+// Check user role. Admin privilege has role of 1 and normal user has role of 2.
 if ( !isset( $_SESSION[ 'role' ] ) || $_SESSION[ 'role' ] == 1 ) {
 	header( 'location:../view/pages/register.php' );
 }
 
-$email = SanitiseData($_POST[ 'email' ]);
-$password = SanitiseData($_POST[ 'pass' ]);
-$firstname = SanitiseData($_POST[ 'firstname' ]);
-$lastname = SanitiseData($_POST[ 'lastname' ]);
-$role = SanitiseData($_POST[ 'role' ]);
+// SANTISE FORM INPUTS
+$email = SanitiseData( $_POST[ 'email' ] );
+$password = SanitiseData( $_POST[ 'pass' ] );
+$firstname = SanitiseData( $_POST[ 'firstname' ] );
+$lastname = SanitiseData( $_POST[ 'lastname' ] );
+$role = SanitiseData( $_POST[ 'role' ] );
 
+// SHOW ERROR
 $_SESSION[ 'error' ] = "";
 
+// VALIDATION OF FORM INPUTS
 if ( empty( $email ) || empty( $password ) || empty( $firstname ) || empty( $lastname ) ) {
 	$_SESSION[ 'error' ] = "Please fill in all the input fields.";
 } else {
@@ -49,8 +55,7 @@ if ( empty( $email ) || empty( $password ) || empty( $firstname ) || empty( $las
 		echo $e;
 	}
 
-
-
+	// Email already exists in the database.
 	if ( $stmt->rowcount() > 0 ) {
 		$_SESSION[ 'error' ] = "<hr>This email is already registered.";
 	}
@@ -58,14 +63,19 @@ if ( empty( $email ) || empty( $password ) || empty( $firstname ) || empty( $las
 	echo "<hr>Session error: " . $_SESSION[ 'error' ] . "<hr>";
 
 	if ( $_SESSION[ 'error' ] == "" ) {
-		
-		//Hash password
+
+		// HASH PASSWORD
 		$hash = password_hash( $password, PASSWORD_DEFAULT );
-		
+
+		// Message of user creation.
+
 		if ( newUser( $conn, $email, $hash, $role, $firstname, $lastname ) ) {
-			$_SESSION[ 'message' ] = 'User successfully created! Welcome ' . $_POST[ 'firstname' ] . " for me will ya?";
+
+			// Success.
+			$_SESSION[ 'message' ] = 'User successfully created! Welcome ' . $_POST[ 'firstname' ] . " User can now login using their user cresidentials.";
 			header( 'location:../view/pages/viewbooks.php' );
 		} else {
+			// fail
 			$_SESSION[ 'error' ] = 'database error - failed to insert user registration data';
 		}
 	} else {

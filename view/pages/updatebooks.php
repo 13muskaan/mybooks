@@ -1,21 +1,29 @@
 <?php
+
+// Page protector
 $whoCanAccess = [ 1, 2 ];
 include( 'header.php' );
 include( 'navigationbar.php' );
 
-//include( '../../model/dbconnection.php' );
+// Code to select book information.
 
+// SELECT STATEMENT
 $selectsql = "SELECT * FROM book WHERE BookID = :id";
 
+// PREPARE THE STATEMENT
 $stmt = $conn->prepare( $selectsql );
 
+// BIND PARAM
 $stmt->bindParam( ':id', $_GET[ 'UpdateID' ], PDO::PARAM_INT );
-//
+
+// EXECUTE
 $stmt->execute();
 
+// FETCH DATA
 $row = $stmt->fetch();
 
-$image = "../" . $row['CoverImage'];
+// IMAGE
+$image = "../" . $row[ 'CoverImage' ];
 
 ?>
 
@@ -33,7 +41,7 @@ $image = "../" . $row['CoverImage'];
 			margin-bottom: 0;
 		}
 	</style>
-	
+
 	<script src="../JS/authorinput.js" type="text/javascript"></script>
 </head>
 <body>
@@ -53,10 +61,7 @@ $image = "../" . $row['CoverImage'];
     </a>
 
 
-
 	<div class="container1" align="center" ; width="20%;">
-		<!--<form role="form" width="50%;" method="post" action="../../control/managebooks_process.php?UpdateID=<?php //echo $row['BookID']; ?>">-->
-
 
 		<form role="form" width="50%" method="post" action="../../model/managebooks_process.php?UpdateID=<?php echo $_GET['UpdateID']; ?>" enctype="multipart/form-data">
 			<br style="clear:both">
@@ -64,7 +69,7 @@ $image = "../" . $row['CoverImage'];
 			<div class="form-group">
 				<input type="text" class="form-control" id="bookTitle" name="newbooktitle" placeholder="Book Title" value="<?php echo $row['BookTitle']; ?>" required>
 			</div>
-			
+
 			<hr class="hr-primary">
 			<h4 style="margin-bottom: 25px; text-align: center;">Author</h4>
 
@@ -107,8 +112,8 @@ $image = "../" . $row['CoverImage'];
 				<input class="form-control" id="deathDate" name="newAuthorDeathDate" placeholder="Year of Death" type="text"/>
 			</div>
 			<hr class="hr-primary">
-			
-			
+
+
 			<div class="form-group">
 				<input type="text" class="form-control" id="genre" name="genre" placeholder="Genre" value="<?php echo $row['Genre']; ?>" required>
 			</div>
@@ -121,7 +126,7 @@ $image = "../" . $row['CoverImage'];
 			<div class="form-group">
 				<input type="text" class="form-control" id="millionsold" name="millionssold" placeholder="Millions Sold" value="<?php echo $row['MillionsSold']; ?>" required>
 			</div>
-			
+
 			<div class="form-group">
 				<div class="text-center">
 					<img src="<?php echo $image ?>" class="avatar img-thumbnail" alt="cover">
@@ -130,7 +135,7 @@ $image = "../" . $row['CoverImage'];
 					<div id=" imageAlert " class="alert alert-danger " style="display: none; "></div>
 				</div>
 			</div>
-			
+
 			<div class="form-group">
 				<input type="submit" id="submit" name="submit" class="btn btn-primary">
 			</div>

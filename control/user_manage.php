@@ -1,4 +1,8 @@
-<?php function NewUser( $conn, $email, $passwordhash, $role, $firstname, $lastname ) {
+<?php
+
+// Code to register user using Transaction.
+
+function NewUser( $conn, $email, $passwordhash, $role, $firstname, $lastname ) {
 	try { //BEGIN try/catch
 		//Begin database transaction
 		$conn->beginTransaction();
@@ -45,4 +49,5 @@
 		//Return failure
 		return false;
 	} //END try/catch
-} ?>
+}
+?>
