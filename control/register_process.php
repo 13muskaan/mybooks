@@ -2,7 +2,7 @@
 // Include files.
 include( '../model/dbconnection.php' );
 include( 'user_manage.php' );
-include( 'testinput.php' );
+include( 'testInput.php' );
 
 // Start session.
 session_start();

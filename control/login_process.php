@@ -2,7 +2,7 @@
 
 // Include database connection and sanitise input files. 
 include( '../model/dbconnection.php' );
-include( 'testinput.php' );
+include( 'testInput.php' );
 // start the session
 session_start();
 

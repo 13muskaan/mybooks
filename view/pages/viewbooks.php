@@ -48,6 +48,7 @@ include( 'navigationbar.php' );
 			</p>
 		</div>
 	</div>
+	<br>
 
 	<?php include ('../../model/message_boxes.php'); ?>
 

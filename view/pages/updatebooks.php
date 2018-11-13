@@ -50,18 +50,23 @@ $image = "../" . $row[ 'CoverImage' ];
 		<div class="container text-center">
 			<h1>My Books</h1>
 			<p>Update Books</p>
+			
+			<a href="viewbooks.php" class="btn btn-primary a-btn-slide-text" style="align-items: center;">
+       <span class="glyphicon glyphicon-back" aria-hidden="true"></span>
+        <span><strong>Back to View Books</strong></span>            
+    </a>
 		</div>
 	</div>
 
 	<?php include ('../../model/message_boxes.php'); ?>
 
-	<a href="viewbooks.php" class="btn btn-primary a-btn-slide-text" style="align-items: center;">
-       <span class="glyphicon glyphicon-back" aria-hidden="true"></span>
-        <span><strong>Go Back</strong></span>            
-    </a>
+	
+	<br>
 
-
-	<div class="container1" align="center" ; width="20%;">
+	<div class="container" align="center">
+		<div class="row">
+			<div class="col-md-3"></div>
+			<div class="col-md-6">
 
 		<form role="form" width="50%" method="post" action="../../model/managebooks_process.php?UpdateID=<?php echo $_GET['UpdateID']; ?>" enctype="multipart/form-data">
 			<br style="clear:both">
